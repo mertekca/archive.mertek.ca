@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.file-list {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.file-item {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+    text-align: center;
+}
+
+.file-item a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.file-item a:hover {
+    text-decoration: underline;
+}
