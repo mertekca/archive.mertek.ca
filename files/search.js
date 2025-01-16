@@ -1,8 +1,8 @@
 // Sample file metadata (in a real project, this could be loaded from a JSON file)
 const files = [
-    { "name": "Free Write 1", "url": "https://free-write.mertek.ca/files/pdf/fw1.pdf", "tags": ["pdf", "document"] },
-    { "name": "Free Write 2", "url": "https://free-write.mertek.ca/files/pdf/fw2.pdf", "tags": ["pdf", "document"] },
-    { "name": "Free Write 3", "url": "https://free-write.mertek.ca/files/pdf/fw3.pdf", "tags": ["pdf", "document"] }
+    { "name": "Free Write 1", "url": "/files/fw1.pdf", "tags": ["pdf", "document"] },
+    { "name": "Free Write 2", "url": "/files/fw2.pdf", "tags": ["pdf", "document"] },
+    { "name": "Free Write 3", "url": "/files/fw3.pdf", "tags": ["pdf", "document"] }
 ];
 
 // Function to filter files based on search query
@@ -17,12 +17,19 @@ function searchFiles() {
     fileList.innerHTML = ''; // Clear previous results
 
     // Display matching files
-    filteredFiles.forEach(file => {
-        const div = document.createElement('div');
-        div.classList.add('file-item');
-        div.innerHTML = `<a href="${file.url}" download>${file.name}</a><br>(${file.tags.join(', ')})`;
-        fileList.appendChild(div);
-    });
+    if (filteredFiles.length > 0) {
+        filteredFiles.forEach(file => {
+            const a = document.createElement('a');
+            a.href = file.url;
+            a.download = '';
+            a.classList.add('file-item');
+            a.innerHTML = `<strong>${file.name}</strong><br>(${file.tags.join(', ')})`;
+            fileList.appendChild(a);
+        });
+        document.getElementById('noResults').style.display = 'none';
+    } else {
+        document.getElementById('noResults').style.display = 'block';
+    }
 }
 
 // Listen for input changes and trigger search
