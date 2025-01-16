@@ -74,11 +74,11 @@ input[type="text"] {
 
 /* Footer styling */
 footer {
-    padding: 10px 20px; /* Reduced padding for a smaller footer */
+    padding: 3px 20px; /* Further reduced padding for an even thinner footer */
     background-color: #333; /* Dark gray background */
     color: #fff; /* White text color */
     text-align: center;
-    font-size: 18px; /* Increased font size for larger text */
+    font-size: 14px; /* Smaller font size */
     border-top: 1px solid #444; /* Slightly lighter gray for top border */
     width: 100%;
     position: relative;
