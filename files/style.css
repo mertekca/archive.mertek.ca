@@ -66,8 +66,9 @@ footer {
     font-size: 14px;
     border-top: 1px solid #444; /* Slightly lighter gray for top border */
     position: relative;
-    bottom: 0;
-    width: 100%;
+    width: 100%; /* Ensure it spans the full width */
+    left: 0; /* Align the footer to the left */
+    right: 0; /* Align the footer to the right */
 }
 
 footer p {
