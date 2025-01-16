@@ -19,12 +19,15 @@ function searchFiles() {
 
     // Display matching files
     filteredFiles.forEach(file => {
-        const div = document.createElement('div');
-        div.classList.add('file-item');
-        div.innerHTML = `
-            <a href="${file.url}" target="_blank">${file.name}</a><br>(${file.tags.join(', ')})
+        const a = document.createElement('a');
+        a.href = file.url;
+        a.target = "_blank"; // Opens in a new tab
+        a.classList.add('file-item'); // Apply styling
+        a.innerHTML = `
+            <div>${file.name}</div>
+            <small>(${file.tags.join(', ')})</small>
         `;
-        fileList.appendChild(div);
+        fileList.appendChild(a);
     });
 }
 
