@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>First Day</title>
@@ -31,8 +30,13 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .download-button {
+        .button-container {
             margin: 20px 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .button {
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
@@ -41,22 +45,24 @@
             font-size: 16px;
             cursor: pointer;
             text-decoration: none;
+            text-align: center;
             display: inline-block;
             transition: background-color 0.3s ease;
         }
 
-        .download-button:hover {
+        .button:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    
-    <!-- Embed the PDF -->
+    <!-- Embed the PDF without toolbar -->
     <iframe src="first-day.pdf#toolbar=0" title="PDF Viewer"></iframe>
 
-    <!-- Download Button -->
-    <a href="first-day.pdf" download class="download-button">Download PDF</a>
-
+    <!-- Buttons -->
+    <div class="button-container">
+        <a href="/" class="button">Home</a>
+        <a href="first-day.pdf" download="" class="button">Download PDF</a>
+    </div>
 </body>
 </html>
