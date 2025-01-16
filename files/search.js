@@ -3,7 +3,7 @@ const files = [
     { "name": "First Day", "url": "/files/pdf/first_day.pdf", "tags": ["memoir", "document"] },
     { "name": "Free Write 1", "url": "/files/pdf/fw1.pdf", "tags": ["free write", "document"] },
     { "name": "Free Write 2", "url": "/files/pdf/fw2.pdf", "tags": ["free write", "document"] },
-    { "name": "Presentation 1", "url": "/files/pldf/pptx", "tags": ["presentation", "slideshow"] }
+    { "name": "Presentation 1", "url": "/files/pptx/pre1.pptx", "tags": ["presentation", "slideshow"] }
 ];
 
 // Function to filter files based on search query
