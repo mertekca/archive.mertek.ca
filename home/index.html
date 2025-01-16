@@ -5,13 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="/files/style.css">
+    <link rel="icon" href="/files/favicon.ico" type="image/x-icon">
+    <meta name="description" content="Search and explore free writes.">
+    <meta name="keywords" content="search, free writes, documents, PDF">
+    <meta name="author" content="Your Name">
 </head>
 <body>
 
-    <h1>Search for Free Writes</h1>
-    <input type="text" id="searchBar" placeholder="Search files..." />
+    <div class="content-wrapper">
+        <h1>Search for Free Writes</h1>
+        <label for="searchBar" class="visually-hidden">Search Files</label>
+        <input type="text" id="searchBar" placeholder="Search files..." />
+        <div id="fileList" class="file-list" role="list"></div>
+        <p id="noResults" class="no-results" style="display:none;">No files found.</p>
+    </div>
 
-    <div id="fileList" class="file-list"></div>
+    <footer>
+        <p>&copy; 2025 Your Website. All rights reserved.</p>
+    </footer>
 
     <script src="/files/search.js"></script>
 </body>
