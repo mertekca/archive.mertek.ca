@@ -1,6 +1,6 @@
 // Sample file metadata (in a real project, this could be loaded from a JSON file)
 const files = [
-    { "name": "First Day", "url": "/files/pdf/first_day.pdf", "tags": ["pdf", "document"] },
+    { "name": "First Day", "url": "/files/pdf/first_day.pdf", "tags": ["memoir", "document"] },
     { "name": "Free Write 2", "url": "/files/pdf/fw2.pdf", "tags": ["pdf", "document"] },
     { "name": "Free Write 3", "url": "/files/pdf/fw3.pdf", "tags": ["pdf", "document"] }
 ];
