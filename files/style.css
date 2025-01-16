@@ -12,7 +12,8 @@ h1 {
 
 input[type="text"] {
     padding: 10px;
-    width: 300px;
+    width: 90%;
+    max-width: 300px;
     margin: 0 auto;
     display: block;
     border-radius: 5px;
@@ -28,21 +29,29 @@ input[type="text"] {
 }
 
 .file-item {
+    display: block;
     background-color: #fff;
     padding: 15px;
     margin: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    width: 200px;
     text-align: center;
-}
-
-.file-item a {
     text-decoration: none;
     color: #007bff;
     font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.file-item a:hover {
-    text-decoration: underline;
+.file-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    color: #0056b3;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 20px;
 }
