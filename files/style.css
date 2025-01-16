@@ -25,7 +25,7 @@ body {
 h1 {
     text-align: center;
     margin-bottom: 20px;
-    font-size: 24px; /* Slightly larger font */
+    font-size: 36px; /* Increased font size for the title */
     color: #333; /* Darker gray for the heading */
 }
 
@@ -62,7 +62,7 @@ input[type="text"] {
     text-decoration: none;
     color: #000; /* Black text color */
     font-weight: bold;
-    width: 200px;
+    width: 200px; /* Fixed size for consistency */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -74,14 +74,15 @@ input[type="text"] {
 
 /* Footer styling */
 footer {
-    padding: 15px 20px;
+    padding: 10px 20px; /* Reduced padding for a smaller footer */
     background-color: #333; /* Dark gray background */
     color: #fff; /* White text color */
     text-align: center;
-    font-size: 14px;
+    font-size: 18px; /* Increased font size for larger text */
     border-top: 1px solid #444; /* Slightly lighter gray for top border */
     width: 100%;
     position: relative;
+    margin-top: auto; /* Keeps the footer at the bottom */
 }
 
 /* Footer links */
@@ -93,22 +94,4 @@ footer a {
 footer a:hover {
     color: #ddd;
     text-decoration: none;
-}
-
-/* Ensures the footer stays at the bottom of the page */
-html, body {
-    height: 100%;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-.content-wrapper {
-    flex: 1; /* Ensures content takes up the remaining vertical space */
-}
-
-footer {
-    margin-top: auto; /* Pushes the footer to the bottom */
 }
