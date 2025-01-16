@@ -37,7 +37,7 @@ input[type="text"] {
     border: 1px solid #ccc;
     text-align: center;
     text-decoration: none;
-    color: #007bff;
+    color: #000; /* Set text color to black */
     font-weight: bold;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -46,7 +46,8 @@ input[type="text"] {
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
-    color: #0056b3;
+    text-decoration: none; /* Prevent underline on hover */
+    color: #000; /* Keep text color black on hover */
 }
 
 .no-results {
