@@ -1,8 +1,8 @@
 // Sample file metadata (in a real project, this could be loaded from a JSON file)
 const files = [
-    { "name": "file1.pdf", "url": "https://free-write.mertek.ca/files/file1.pdf", "tags": ["pdf", "document"] },
-    { "name": "file2.pdf", "url": "https://free-write.mertek.ca/files/file2.pdf", "tags": ["pdf", "document"] },
-    { "name": "file3.pdf", "url": "https://free-write.mertek.ca/files/file3.pdf", "tags": ["pdf", "document"] }
+    { "name": "Free Write 1", "url": "https://free-write.mertek.ca/files/fw1.pdf", "tags": ["pdf", "document"] },
+    { "name": "Free Write 2", "url": "https://free-write.mertek.ca/files/fw2.pdf", "tags": ["pdf", "document"] },
+    { "name": "Free Write 3", "url": "https://free-write.mertek.ca/files/fw3.pdf", "tags": ["pdf", "document"] }
 ];
 
 // Function to filter files based on search query
