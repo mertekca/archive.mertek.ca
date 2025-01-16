@@ -18,19 +18,14 @@ function searchFiles() {
     fileList.innerHTML = ''; // Clear previous results
 
     // Display matching files
-    if (filteredFiles.length > 0) {
-        filteredFiles.forEach(file => {
-            const a = document.createElement('a');
-            a.href = file.url;
-            a.download = '';
-            a.classList.add('file-item');
-            a.innerHTML = `<strong>${file.name}</strong><br>(${file.tags.join(', ')})`;
-            fileList.appendChild(a);
-        });
-        document.getElementById('noResults').style.display = 'none';
-    } else {
-        document.getElementById('noResults').style.display = 'block';
-    }
+    filteredFiles.forEach(file => {
+        const div = document.createElement('div');
+        div.classList.add('file-item');
+        div.innerHTML = `
+            <a href="${file.url}" target="_blank">${file.name}</a><br>(${file.tags.join(', ')})
+        `;
+        fileList.appendChild(div);
+    });
 }
 
 // Listen for input changes and trigger search
