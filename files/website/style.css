@@ -85,7 +85,6 @@ input[type="text"] {
 
 /* Footer styling */
 footer {
-    padding: 5px 20px; /* Reduced padding for a thinner footer */
     background-color: #333; /* Dark gray background */
     color: #fff; /* White text color */
     text-align: center;
