@@ -1,20 +1,63 @@
 // Sample file metadata (in a real project, this could be loaded from a JSON file)
 const files = [
-    { "name": "First Day", "url": "/files/first-day/", "tags": ["memoir", "document"] },
-    { "name": "Free Write 1", "url": "/files/free-write-1/", "tags": ["free write", "document"] },
-    { "name": "Free Write 2", "url": "/files/free-write-2/", "tags": ["free write", "document"] },
-    { "name": "Adventure 1", "url": "/files/adventure-1/", "tags": ["memoir", "document"] },
-    { "name": "Memoir 2", "url": "/files/memoir-2/", "tags": ["free write", "memoir"] },
-    { "name": "Presentation 3", "url": "/files/presentation-3/", "tags": ["slideshow", "research"] },
-    { "name": "Free Write 4", "url": "/files/free-write-4/", "tags": ["free write", "document"] },
-    { "name": "Volcano 5", "url": "/files/volcano-5/", "tags": ["research", "slideshow"] },
-    { "name": "Ocean Tale 6", "url": "/files/ocean-tale-6/", "tags": ["memoir", "document"] },
-    { "name": "Adventure 7", "url": "/files/adventure-7/", "tags": ["free write", "research"] },
-    { "name": "Memoir 8", "url": "/files/memoir-8/", "tags": ["document", "memoir"] },
-    { "name": "Presentation 9", "url": "/files/presentation-9/", "tags": ["slideshow", "free write"] },
-    { "name": "Volcano 10", "url": "/files/volcano-10/", "tags": ["research", "memoir"] },
-    { "name": "Presentation 1", "url": "/files/presentation-1/", "tags": ["presentation", "slideshow"] },
-    { "name": "Volcanic Eruptions", "url": "/files/volcanic-eruptions/", "tags": ["presentation", "slideshow"] }
+    { "name": "First Day",
+    "url": "/files/first-day/", 
+    "tags": ["memoir", "document"] 
+    },
+    { "name": "Volcanic Eruptions", 
+    "url": "/files/volcanic-eruptions/",
+    "tags": ["presentation", "slideshow"] 
+    },
+    {
+    "name": "Journey",
+    "url": "/files/journey/",
+    "tags": ["journey", "adventure"]
+    },
+    {
+    "name": "Memoir",
+    "url": "/files/memoir/",
+    "tags": ["memoir", "autobiography"]
+    },
+    {
+    "name": "Voyage",
+    "url": "/files/voyage/",
+    "tags": ["voyage", "travel"]
+    },
+    {
+    "name": "Tale",
+    "url": "/files/tale/",
+    "tags": ["tale", "story"]
+    },
+    {
+    "name": "Recollection",
+    "url": "/files/recollection/",
+    "tags": ["recollection", "memoir"]
+    },
+    {
+    "name": "Exploration",
+    "url": "/files/exploration/",
+    "tags": ["exploration", "discovery"]
+    },
+    {
+    "name": "Epic",
+    "url": "/files/epic/",
+    "tags": ["epic", "legend"]
+    },
+    {
+    "name": "Journey",
+    "url": "/files/journey/",
+    "tags": ["journey", "personal"]
+    },
+    {
+    "name": "Quest",
+    "url": "/files/quest/",
+    "tags": ["quest", "adventure"]
+    },
+    {
+    "name": "Adventure",
+    "url": "/files/adventure/",
+    "tags": ["adventure", "exploration"]
+    }
 ];
 
 // Function to filter files based on search query
