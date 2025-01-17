@@ -105,3 +105,9 @@ footer a:hover {
     color: #ddd;
     text-decoration: none;
 }
+
+#noFilesMessage {
+    color: #d9534f; /* Red color for error message */
+    font-size: 18px;
+    margin-top: 20px;
+}
