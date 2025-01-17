@@ -9,8 +9,8 @@ const files = [
     "tags": ["presentation", "slideshow"] 
     },
     {
-    "name": "Journey into the Unknown",
-    "url": "/files/journey-into-the-unknown/",
+    "name": "Unknown Journey",
+    "url": "/files/unknown-journey/",
     "tags": ["journey", "mystery"]
     },
     {
@@ -84,9 +84,9 @@ const files = [
     "tags": ["wild", "adventure"]
     },
     {
-    "name": "The Chronicles of Discovery",
-    "url": "/files/the-chronicles-of-discovery/",
-    "tags": ["chronicles", "discovery"]
+    "name": "The Chronicles,
+    "url": "/files/the-chronicles/",
+    "tags": ["chronicles", "document"]
     },
     {
     "name": "Quest for the Forgotten",
