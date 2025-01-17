@@ -6,137 +6,163 @@
     <title>Presentation 1</title>
     <link rel="icon" href="/files/website/favicon.ico" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-       <style>
+    <style>
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
+            justify-content: center;
+            min-height: 100vh;
             background-color: #f4f4f4;
         }
 
-        .presentation-container {
+        h1 {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .pdf-container {
             position: relative;
             width: 80%;
-            height: 90%;
+            max-width: 800px;
+            height: 80vh;
+            margin: 20px 0;
             border: 1px solid #ccc;
-            background: white;
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #fff;
         }
 
-        iframe {
+        canvas {
             width: 100%;
-            height: 100%;
-            border: none;
+            height: auto;
         }
 
-        .controls {
+        /* Overlay buttons */
+        .overlay-buttons {
             position: absolute;
             top: 50%;
+            width: 100%;
             display: flex;
             justify-content: space-between;
-            width: 100%;
+            transform: translateY(-50%);
+            padding: 0 20px;
         }
 
-        .control-button {
-            background: rgba(0, 0, 0, 0.5);
+        .overlay-buttons button {
+            background-color: rgba(0, 123, 255, 0.7);
             color: white;
             border: none;
+            border-radius: 5px;
+            font-size: 16px;
             padding: 10px;
             cursor: pointer;
-            font-size: 24px;
-            user-select: none;
+            transition: background-color 0.3s ease;
         }
 
-        .control-button:hover {
-            background: rgba(0, 0, 0, 0.8);
+        .overlay-buttons button:hover {
+            background-color: rgba(0, 123, 255, 1);
         }
 
-        .slide-indicator {
-            position: absolute;
-            bottom: 10px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 14px;
+        .button-container {
+            margin: 20px 0;
+            display: flex;
+            gap: 20px;
         }
 
-        .navigation {
-            margin-top: 10px;
-        }
-
-        .nav-button {
+        .button {
             padding: 10px 20px;
-            font-size: 16px;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
+            font-size: 16px;
             cursor: pointer;
             text-decoration: none;
+            text-align: center;
+            display: inline-block;
+            transition: background-color 0.3s ease;
         }
 
-        .nav-button:hover {
+        .button:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
-    <div class="presentation-container">
-        <iframe id="presentationFrame" src="presentation-1.pdf#page=1"></iframe>
+    <!-- PDF Viewer Container -->
+    <div class="pdf-container">
+        <canvas id="pdfCanvas"></canvas>
 
-        <div class="controls">
-            <button class="control-button" onclick="prevSlide()">←</button>
-            <button class="control-button" onclick="nextSlide()">→</button>
+        <!-- Overlay buttons -->
+        <div class="overlay-buttons">
+            <button id="prevBtn">←</button>
+            <button id="nextBtn">→</button>
         </div>
-
-        <div class="slide-indicator" id="slideIndicator">Slide 1</div>
     </div>
 
-    <div class="navigation">
-        <a href="index.html" class="nav-button">Home</a>
-        <a href="presentation-1.pdf" class="download-button" download>Download PDF</a>
-        <a href="presentation-1.pptx" class="download-button" download>Download PPTX</a>
+    <div class="button-container">
+        <a href="/" class="button">Home</a>
+        <a href="presentation-1.pdf" download class="button">Download PDF</a>
+        <a href="presentation-1.pptx" download class="button">Download PPTX</a>
     </div>
 
     <script>
+        const url = '/files/presentation-1/presentation-1.pdf'; // Replace with your PDF URL or path
         let currentPage = 1;
-        const totalPages = 3; // Replace with the total number of slides in your presentation
-        const iframe = document.getElementById('presentationFrame');
-        const slideIndicator = document.getElementById('slideIndicator');
+        let pdfDoc = null;
+        let totalPages = 0;
 
-        function updateSlide() {
-            iframe.src = `presentation.pdf#page=${currentPage}`;
-            slideIndicator.textContent = `Slide ${currentPage} of ${totalPages}`;
+        // Get the canvas element and its context
+        const canvas = document.getElementById('pdfCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Fetch the PDF document
+        pdfjsLib.getDocument(url).promise.then(pdf => {
+            pdfDoc = pdf;
+            totalPages = pdf.numPages;
+            renderPage(currentPage);
+        }).catch(error => {
+            console.error('Error loading PDF: ', error);
+        });
+
+        // Render a specific page
+        function renderPage(pageNum) {
+            pdfDoc.getPage(pageNum).then(page => {
+                const viewport = page.getViewport({ scale: 1.5 });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                page.render({
+                    canvasContext: ctx,
+                    viewport: viewport
+                });
+            }).catch(error => {
+                console.error('Error rendering page: ', error);
+            });
         }
 
-        function nextSlide() {
+        // Show the next page
+        document.getElementById('nextBtn').addEventListener('click', () => {
             if (currentPage < totalPages) {
                 currentPage++;
-                updateSlide();
+                renderPage(currentPage);
             }
-        }
+        });
 
-        function prevSlide() {
+        // Show the previous page
+        document.getElementById('prevBtn').addEventListener('click', () => {
             if (currentPage > 1) {
                 currentPage--;
-                updateSlide();
+                renderPage(currentPage);
             }
-        }
-
-        // Initialize the slide indicator on page load
-        updateSlide();
+        });
     </script>
-
-</body>
-</html>
 
 </body>
 </html>
