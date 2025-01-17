@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentation 1</title>
+    <title>PDF Viewer (Slideshow)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,12 +24,21 @@
             color: #333;
         }
 
-        iframe {
+        .pdf-container {
             width: 80%;
+            max-width: 800px;
             height: 80vh;
+            margin: 20px 0;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
         }
 
         .button-container {
@@ -57,16 +67,70 @@
     </style>
 </head>
 <body>
+    <!-- PDF Viewer Container -->
+    <div class="pdf-container">
+        <canvas id="pdfCanvas"></canvas>
+    </div>
 
-    <!-- Embed the PDF -->
-    <iframe src="presentation-1.pdf#toolbar=0" title="PDF Viewer"></iframe>
+    <!-- Buttons for navigation -->
+    <div class="button-container">
+        <button id="prevBtn" class="button">Previous</button>
+        <button id="nextBtn" class="button">Next</button>
+    </div>
 
-    <!-- Buttons -->
     <div class="button-container">
         <a href="/" class="button">Home</a>
-        <a href="presentation-1.pptx" download class="button">Download PPTX</a>
-        <a href="presentation-1.pdf" download class="button">Download PDF</a>
+        <a href="path-to-your-pdf-file.pdf" download class="button">Download PDF</a>
     </div>
+
+    <script>
+        const url = '/files/presentation-1/presentation-1.pdf'; // Replace with your PDF URL or path
+        let currentPage = 1;
+        let pdfDoc = null;
+        let totalPages = 0;
+
+        // Get the canvas element and its context
+        const canvas = document.getElementById('pdfCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Fetch the PDF document
+        pdfjsLib.getDocument(url).promise.then(pdf => {
+            pdfDoc = pdf;
+            totalPages = pdf.numPages;
+            renderPage(currentPage);
+        }).catch(error => {
+            console.error('Error loading PDF: ', error);
+        });
+
+        // Render a specific page
+        function renderPage(pageNum) {
+            pdfDoc.getPage(pageNum).then(page => {
+                const viewport = page.getViewport({ scale: 1.5 });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                page.render({
+                    canvasContext: ctx,
+                    viewport: viewport
+                });
+            });
+        }
+
+        // Show the next page
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderPage(currentPage);
+            }
+        });
+
+        // Show the previous page
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderPage(currentPage);
+            }
+        });
+    </script>
 
 </body>
 </html>
