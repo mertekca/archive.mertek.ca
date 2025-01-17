@@ -21,7 +21,6 @@ function searchFiles() {
     filteredFiles.forEach(file => {
         const a = document.createElement('a');
         a.href = file.url;
-        a.target = "_blank"; // Opens in a new tab
         a.classList.add('file-item'); // Apply styling
         a.innerHTML = `
             <div>${file.name}</div>
