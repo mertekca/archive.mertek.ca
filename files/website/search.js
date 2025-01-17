@@ -1,3 +1,4 @@
+
 // Sample file metadata (in a real project, this could be loaded from a JSON file)
 const files = [
     { "name": "First Day", "url": "/files/first-day/", "tags": ["memoir", "document"] },
@@ -6,25 +7,28 @@ const files = [
     { "name": "Presentation 1", "url": "/files/presentation-1/", "tags": ["presentation", "slideshow"] }
 ];
 
- // Get the file list container and the no files message
-    const fileList = document.getElementById('fileList');
-    const noFilesMessage = document.getElementById('noFilesMessage');
+// Function to filter files based on search query
+function searchFiles() {
+    const query = document.getElementById('searchBar').value.toLowerCase();
+    const filteredFiles = files.filter(file => 
+        file.name.toLowerCase().includes(query) || file.tags.some(tag => tag.toLowerCase().includes(query))
+    );
 
+    // Get the file list container
+    const fileList = document.getElementById('fileList');
     fileList.innerHTML = ''; // Clear previous results
-    noFilesMessage.style.display = 'none'; // Hide the no files message
 
     // Display matching files
-    if (filteredFiles.length === 0) {
-        // Show the "No files found" message
-        noFilesMessage.style.display = 'block';
-    } else {
-        filteredFiles.forEach(file => {
-            const div = document.createElement('div');
-            div.classList.add('file-item');
-            div.innerHTML = `<a href="${file.url}" download>${file.name}</a><br>(${file.tags.join(', ')})`;
-            fileList.appendChild(div);
-        });
-    }
+    filteredFiles.forEach(file => {
+        const a = document.createElement('a');
+        a.href = file.url;
+        a.classList.add('file-item'); // Apply styling
+        a.innerHTML = `
+            <div>${file.name}</div>
+            <small>(${file.tags.join(', ')})</small>
+        `;
+        fileList.appendChild(a);
+    });
 }
 
 // Listen for input changes and trigger search
