@@ -4,7 +4,7 @@ const files = [
     { "name": "First Day", "url": "/files/first-day/", "tags": ["memoir", "document"] },
     { "name": "Free Write 1", "url": "/files/free-write-1/", "tags": ["free write", "document"] },
     { "name": "Free Write 2", "url": "/files/free-write-2/", "tags": ["free write", "document"] },
-    { "name": "Presentation 1", "url": "/files/presentation-1/", "tags": ["presentation", "slideshow"] }
+    { "name": "Presentation 1", "url": "/files/presentation-1/", "tags": ["presentation", "slideshow"] },
     { "name": "Volcanic Eruption Presentation", "url": "/files/volcanic-eruption-presentation/", "tags": ["presentation", "slideshow"] }
 ];
 
