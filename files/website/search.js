@@ -84,7 +84,7 @@ const files = [
     "tags": ["wild", "adventure"]
     },
     {
-    "name": "The Chronicles,
+    "name": "The Chronicles",
     "url": "/files/the-chronicles/",
     "tags": ["chronicles", "document"]
     },
