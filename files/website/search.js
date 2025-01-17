@@ -9,54 +9,104 @@ const files = [
     "tags": ["presentation", "slideshow"] 
     },
     {
-    "name": "Journey",
-    "url": "/files/journey/",
-    "tags": ["journey", "adventure"]
+    "name": "Journey into the Unknown",
+    "url": "/files/journey-into-the-unknown/",
+    "tags": ["journey", "mystery"]
     },
     {
-    "name": "Memoir",
-    "url": "/files/memoir/",
-    "tags": ["memoir", "autobiography"]
+    "name": "Memoirs of a Wanderer",
+    "url": "/files/memoirs-of-a-wanderer/",
+    "tags": ["memoir", "adventure"]
     },
     {
-    "name": "Voyage",
-    "url": "/files/voyage/",
-    "tags": ["voyage", "travel"]
+    "name": "The Grand Voyage",
+    "url": "/files/the-grand-voyage/",
+    "tags": ["voyage", "epic"]
     },
     {
-    "name": "Tale",
-    "url": "/files/tale/",
-    "tags": ["tale", "story"]
+    "name": "Tales of the Sea",
+    "url": "/files/tales-of-the-sea/",
+    "tags": ["sea", "adventure"]
     },
     {
-    "name": "Recollection",
-    "url": "/files/recollection/",
-    "tags": ["recollection", "memoir"]
+    "name": "The Last Recollection",
+    "url": "/files/the-last-recollection/",
+    "tags": ["memoir", "reflection"]
     },
     {
-    "name": "Exploration",
-    "url": "/files/exploration/",
-    "tags": ["exploration", "discovery"]
+    "name": "Exploration of the Wild",
+    "url": "/files/exploration-of-the-wild/",
+    "tags": ["exploration", "nature"]
     },
     {
-    "name": "Epic",
-    "url": "/files/epic/",
-    "tags": ["epic", "legend"]
+    "name": "Epic of the Lost City",
+    "url": "/files/epic-of-the-lost-city/",
+    "tags": ["epic", "mystery"]
     },
     {
-    "name": "Journey",
-    "url": "/files/journey/",
-    "tags": ["journey", "personal"]
+    "name": "A Personal Quest",
+    "url": "/files/a-personal-quest/",
+    "tags": ["quest", "journey"]
     },
     {
-    "name": "Quest",
-    "url": "/files/quest/",
-    "tags": ["quest", "adventure"]
+    "name": "Adventures in Time",
+    "url": "/files/adventures-in-time/",
+    "tags": ["adventure", "time"]
     },
     {
-    "name": "Adventure",
-    "url": "/files/adventure/",
-    "tags": ["adventure", "exploration"]
+    "name": "Uncharted Worlds",
+    "url": "/files/uncharted-worlds/",
+    "tags": ["exploration", "space"]
+    },
+    {
+    "name": "The Great Expedition",
+    "url": "/files/the-great-expedition/",
+    "tags": ["expedition", "discovery"]
+    },
+    {
+    "name": "Reflections of the Past",
+    "url": "/files/reflections-of-the-past/",
+    "tags": ["reflection", "history"]
+    },
+    {
+    "name": "Echoes of the Journey",
+    "url": "/files/echoes-of-the-journey/",
+    "tags": ["journey", "echoes"]
+    },
+    {
+    "name": "Legends of the Lost",
+    "url": "/files/legends-of-the-lost/",
+    "tags": ["legends", "myth"]
+    },
+    {
+    "name": "Into the Wild Unknown",
+    "url": "/files/into-the-wild-unknown/",
+    "tags": ["wild", "adventure"]
+    },
+    {
+    "name": "The Chronicles of Discovery",
+    "url": "/files/the-chronicles-of-discovery/",
+    "tags": ["chronicles", "discovery"]
+    },
+    {
+    "name": "Quest for the Forgotten",
+    "url": "/files/quest-for-the-forgotten/",
+    "tags": ["quest", "forgotten"]
+    },
+    {
+    "name": "Sailing Through Time",
+    "url": "/files/sailing-through-time/",
+    "tags": ["time", "sailing"]
+    },
+    {
+    "name": "The Mysterious Voyage",
+    "url": "/files/the-mysterious-voyage/",
+    "tags": ["mysterious", "voyage"]
+    },
+    {
+    "name": "Whispers from the Past",
+    "url": "/files/whispers-from-the-past/",
+    "tags": ["whispers", "history"]
     }
 ];
 
