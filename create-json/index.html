@@ -3,27 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Entries Editor & Creator</title>
+    <title>JSON Generator with File Upload/Download</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="/files/website/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <header>
-        <h1>File Entries Editor & Creator</h1>
-    </header>
-    <main>
-        <section>
-            <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
-            <div class="buttons">
-                <button id="downloadBtn">Download JSON</button>
-                <input type="file" id="uploadInput" accept="application/json">
-            </div>
-        </section>
-        <footer>
-            <p>Designed to easily edit JSON data.</p>
-        </footer>
-    </main>
+    <h1>JSON Entry Generator</h1>
+    <div>
+        <button id="add-entry">Add New Entry</button>
+        <button id="generate-json">Generate JSON</button>
+        <button id="download-json">Download JSON</button>
+        <label>
+            <input type="file" id="upload-json" accept=".json" style="display:none;">
+            <button id="upload-btn">Upload JSON</button>
+        </label>
+    </div>
 
-    <script src="ui.js"></script>
+    <div id="entries-container"></div>
+    <h2>Output:</h2>
+    <textarea id="output" readonly></textarea>
+
+    <script src="script.js"></script>
 </body>
 </html>
