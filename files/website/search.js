@@ -2,7 +2,7 @@
 async function loadFiles() {
     try {
         // Fetch the JSON file
-        const response = await fetch('../files.json');
+        const response = await fetch('files.json');
         if (!response.ok) {
             throw new Error('Failed to load files.json');
         }
