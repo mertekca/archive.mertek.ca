@@ -57,7 +57,7 @@ button {
 }
 
 .remove-entry:disabled {
-    background-color: #ccc;  /* Grey out when disabled */
-    cursor: not-allowed;     /* Prevent the cursor from showing as clickable */
-    color: #666;             /* Optional: change text color to grey */
+    background-color: #ccc !important;
+    cursor: not-allowed;
+    color: #666 !important;
 }
