@@ -2,8 +2,17 @@ const entriesContainer = document.getElementById("entries-container");
 const output = document.getElementById("output");
 const uploadInput = document.getElementById("upload-json");
 
+document.addEventListener("DOMContentLoaded", () => {
+    addEntry(); // Start with one entry
+});
+
 // Add new entry
 document.getElementById("add-entry").addEventListener("click", () => {
+    addEntry();
+});
+
+// Add entry function
+function addEntry() {
     const entry = document.createElement("div");
     entry.className = "entry";
     entry.innerHTML = `
@@ -13,9 +22,15 @@ document.getElementById("add-entry").addEventListener("click", () => {
         <label>Invisible Tags (comma-separated): <input type="text" class="inviTags"></label><br>
         <button class="remove-entry">Remove</button>
     `;
-    entry.querySelector(".remove-entry").addEventListener("click", () => entry.remove());
+    entry.querySelector(".remove-entry").addEventListener("click", () => {
+        if (entriesContainer.children.length > 1) {
+            entry.remove(); // Remove only if more than one entry exists
+        } else {
+            alert("Cannot delete the last entry!");
+        }
+    });
     entriesContainer.appendChild(entry);
-});
+}
 
 // Generate JSON
 document.getElementById("generate-json").addEventListener("click", () => {
@@ -47,11 +62,10 @@ document.getElementById("upload-btn").addEventListener("click", () => {
     uploadInput.click();
 });
 
-// Copy to Clipboard
+// Copy JSON to clipboard
 document.getElementById("copy-btn").addEventListener("click", () => {
-    const outputText = document.getElementById("output");
-    outputText.select();
-    document.execCommand("copy"); // Copies the text
+    output.select();
+    document.execCommand("copy");
     alert("JSON copied to clipboard!");
 });
 
