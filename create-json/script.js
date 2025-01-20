@@ -24,23 +24,31 @@ function addEntry() {
     `;
     const removeButton = entry.querySelector(".remove-entry");
 
+    // Disable the remove button if only one entry exists
+    if (entriesContainer.children.length <= 1) {
+        removeButton.disabled = true;
+        removeButton.style.backgroundColor = "#ccc"; // Grey out the button
+        removeButton.style.cursor = "not-allowed"; // Prevent cursor from showing clickable
+    }
+
     removeButton.addEventListener("click", () => {
         if (entriesContainer.children.length > 1) {
             entry.remove(); // Remove only if more than one entry exists
         }
     });
-
     entriesContainer.appendChild(entry);
-    updateRemoveButtonState();
+    checkRemoveButtons(); // Check buttons after adding an entry
 }
 
 // Update entry count and disable remove button if necessary
-function updateRemoveButtonState() {
-    const removeButtons = entriesContainer.querySelectorAll('.remove-entry');
-    removeButtons.forEach(button => {
-        if (entriesContainer.children.length === 1) {
+entriesContainer.addEventListener("DOMSubtreeModified", checkRemoveButtons);
+
+function checkRemoveButtons() {
+    const removeButtons = document.querySelectorAll(".remove-entry");
+    removeButtons.forEach((button) => {
+        if (entriesContainer.children.length <= 1) {
             button.disabled = true;
-            button.style.backgroundColor = "#ccc"; // Grey out the button
+            button.style.backgroundColor = "#ccc"; // Force greyed-out style
             button.style.cursor = "not-allowed"; // Prevent cursor from showing clickable
         } else {
             button.disabled = false;
@@ -49,9 +57,6 @@ function updateRemoveButtonState() {
         }
     });
 }
-
-// Ensure remove buttons are updated whenever DOM changes
-entriesContainer.addEventListener('DOMSubtreeModified', updateRemoveButtonState);
 
 // Generate JSON
 document.getElementById("generate-json").addEventListener("click", () => {
