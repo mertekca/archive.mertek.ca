@@ -1,112 +1,136 @@
 // Sample file metadata (in a real project, this could be loaded from a JSON file)
 const files = [
-    { "name": "First Day",
-    "url": "/files/first-day/", 
-    "tags": ["memoir", "document"] 
+    { 
+        "name": "First Day",
+        "url": "/files/first-day/", 
+        "tags": ["memoir", "beginnings"],
+        "inviTags": ["school", "student", "new beginnings"]
     },
-    { "name": "Volcanic Eruptions", 
-    "url": "/files/volcanic-eruptions/",
-    "tags": ["presentation", "slideshow"] 
-    },
-    {
-    "name": "Unknown Journey",
-    "url": "/files/unknown-journey/",
-    "tags": ["journey", "mystery"]
-    },
-    {
-    "name": "Memoirs of a Wanderer",
-    "url": "/files/memoirs-of-a-wanderer/",
-    "tags": ["memoir", "adventure"]
+    { 
+        "name": "Volcanic Eruptions", 
+        "url": "/files/volcanic-eruptions/",
+        "tags": ["disaster", "explosive"],
+        "inviTags": ["nature", "eruption", "lava"]
     },
     {
-    "name": "The Grand Voyage",
-    "url": "/files/the-grand-voyage/",
-    "tags": ["voyage", "epic"]
+        "name": "Unknown Journey",
+        "url": "/files/unknown-journey/",
+        "tags": ["journey", "mystery"],
+        "inviTags": ["exploration", "unknown", "adventure"]
     },
     {
-    "name": "Tales of the Sea",
-    "url": "/files/tales-of-the-sea/",
-    "tags": ["sea", "adventure"]
+        "name": "Memoirs of a Wanderer",
+        "url": "/files/memoirs-of-a-wanderer/",
+        "tags": ["memoir", "adventure"],
+        "inviTags": ["travel", "life journey", "wanderlust"]
     },
     {
-    "name": "The Last Recollection",
-    "url": "/files/the-last-recollection/",
-    "tags": ["memoir", "reflection"]
+        "name": "The Grand Voyage",
+        "url": "/files/the-grand-voyage/",
+        "tags": ["voyage", "epic"],
+        "inviTags": ["sea", "exploration", "journey"]
     },
     {
-    "name": "Exploration of the Wild",
-    "url": "/files/exploration-of-the-wild/",
-    "tags": ["exploration", "nature"]
+        "name": "Tales of the Sea",
+        "url": "/files/tales-of-the-sea/",
+        "tags": ["sea", "adventure"],
+        "inviTags": ["ocean", "exploration", "stories"]
     },
     {
-    "name": "Epic of the Lost City",
-    "url": "/files/epic-of-the-lost-city/",
-    "tags": ["epic", "mystery"]
+        "name": "The Last Recollection",
+        "url": "/files/the-last-recollection/",
+        "tags": ["memoir", "reflection"],
+        "inviTags": ["memory", "thoughts", "past"]
     },
     {
-    "name": "A Personal Quest",
-    "url": "/files/a-personal-quest/",
-    "tags": ["quest", "journey"]
+        "name": "Exploration of the Wild",
+        "url": "/files/exploration-of-the-wild/",
+        "tags": ["exploration", "nature"],
+        "inviTags": ["adventure", "wilderness", "discovery"]
     },
     {
-    "name": "Adventures in Time",
-    "url": "/files/adventures-in-time/",
-    "tags": ["adventure", "time"]
+        "name": "Epic of the Lost City",
+        "url": "/files/epic-of-the-lost-city/",
+        "tags": ["epic", "mystery"],
+        "inviTags": ["ancient", "lost city", "history"]
     },
     {
-    "name": "Uncharted Worlds",
-    "url": "/files/uncharted-worlds/",
-    "tags": ["exploration", "space"]
+        "name": "A Personal Quest",
+        "url": "/files/a-personal-quest/",
+        "tags": ["quest", "journey"],
+        "inviTags": ["adventure", "self-discovery", "challenge"]
     },
     {
-    "name": "The Great Expedition",
-    "url": "/files/the-great-expedition/",
-    "tags": ["expedition", "discovery"]
+        "name": "Adventures in Time",
+        "url": "/files/adventures-in-time/",
+        "tags": ["adventure", "time"],
+        "inviTags": ["history", "time travel", "journey"]
     },
     {
-    "name": "Reflections of the Past",
-    "url": "/files/reflections-of-the-past/",
-    "tags": ["reflection", "history"]
+        "name": "Uncharted Worlds",
+        "url": "/files/uncharted-worlds/",
+        "tags": ["exploration", "space"],
+        "inviTags": ["discovery", "outer space", "adventure"]
     },
     {
-    "name": "Echoes of the Journey",
-    "url": "/files/echoes-of-the-journey/",
-    "tags": ["journey", "echoes"]
+        "name": "The Great Expedition",
+        "url": "/files/the-great-expedition/",
+        "tags": ["expedition", "discovery"],
+        "inviTags": ["journey", "adventure", "exploration"]
     },
     {
-    "name": "Legends of the Lost",
-    "url": "/files/legends-of-the-lost/",
-    "tags": ["legends", "myth"]
+        "name": "Reflections of the Past",
+        "url": "/files/reflections-of-the-past/",
+        "tags": ["reflection", "history"],
+        "inviTags": ["memory", "historical", "thoughts"]
     },
     {
-    "name": "Into the Wild Unknown",
-    "url": "/files/into-the-wild-unknown/",
-    "tags": ["wild", "adventure"]
+        "name": "Echoes of the Journey",
+        "url": "/files/echoes-of-the-journey/",
+        "tags": ["journey", "echoes"],
+        "inviTags": ["adventure", "life", "memories"]
     },
     {
-    "name": "The Chronicles",
-    "url": "/files/the-chronicles/",
-    "tags": ["chronicles", "document"]
+        "name": "Legends of the Lost",
+        "url": "/files/legends-of-the-lost/",
+        "tags": ["legends", "myth"],
+        "inviTags": ["mythology", "history", "mystery"]
     },
     {
-    "name": "Quest for the Forgotten",
-    "url": "/files/quest-for-the-forgotten/",
-    "tags": ["quest", "forgotten"]
+        "name": "Into the Wild Unknown",
+        "url": "/files/into-the-wild-unknown/",
+        "tags": ["wild", "adventure"],
+        "inviTags": ["wilderness", "exploration", "unknown"]
     },
     {
-    "name": "Sailing Through Time",
-    "url": "/files/sailing-through-time/",
-    "tags": ["time", "sailing"]
+        "name": "The Chronicles",
+        "url": "/files/the-chronicles/",
+        "tags": ["chronicles", "document"],
+        "inviTags": ["stories", "records", "history"]
     },
     {
-    "name": "The Mysterious Voyage",
-    "url": "/files/the-mysterious-voyage/",
-    "tags": ["mysterious", "voyage"]
+        "name": "Quest for the Forgotten",
+        "url": "/files/quest-for-the-forgotten/",
+        "tags": ["quest", "forgotten"],
+        "inviTags": ["adventure", "search", "mystery"]
     },
     {
-    "name": "Whispers from the Past",
-    "url": "/files/whispers-from-the-past/",
-    "tags": ["whispers", "history"]
+        "name": "Sailing Through Time",
+        "url": "/files/sailing-through-time/",
+        "tags": ["time", "sailing"],
+        "inviTags": ["history", "journey", "ocean"]
+    },
+    {
+        "name": "The Mysterious Voyage",
+        "url": "/files/the-mysterious-voyage/",
+        "tags": ["mysterious", "voyage"],
+        "inviTags": ["sea", "adventure", "unknown"]
+    },
+    {
+        "name": "Whispers from the Past",
+        "url": "/files/whispers-from-the-past/",
+        "tags": ["whispers", "history"],
+        "inviTags": ["memory", "historical", "echoes"]
     }
 ];
 
@@ -114,7 +138,9 @@ const files = [
 function searchFiles() {
     const query = document.getElementById('searchBar').value.toLowerCase();
     let filteredFiles = files.filter(file => 
-        file.name.toLowerCase().includes(query) || file.tags.some(tag => tag.toLowerCase().includes(query))
+        file.name.toLowerCase().includes(query) || 
+        file.tags.some(tag => tag.toLowerCase().includes(query)) || 
+        (file.inviTags && file.inviTags.some(tag => tag.toLowerCase().includes(query)))
     );
 
     // Sort files alphabetically by name
