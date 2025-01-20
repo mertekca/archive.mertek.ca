@@ -3,106 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Set Creator And Editor</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .entry { margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; }
-        textarea { width: 100%; height: 100px; }
-    </style>
+    <title>File Entries Editor & Creator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>JSON Entry Generator</h1>
-    <div>
-        <button id="add-entry">Add New Entry</button>
-        <button id="generate-json">Generate JSON</button>
-        <button id="download-json">Download JSON</button>
-        <label>
-            <input type="file" id="upload-json" accept=".json" style="display:none;">
-            <button id="upload-btn">Upload JSON</button>
-        </label>
-    </div>
-
-    <div id="entries-container"></div>
-    <h2>Output:</h2>
-    <textarea id="output" readonly></textarea>
+    <header>
+        <h1>File Entries Editor & Creator</h1>
+    </header>
+    <main>
+        <section>
+            <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+            <div class="buttons">
+                <button id="downloadBtn">Download JSON</button>
+                <input type="file" id="uploadInput" accept="application/json">
+            </div>
+        </section>
+        <footer>
+            <p>Designed to easily edit JSON data.</p>
+        </footer>
+    </main>
 
     <script>
-        const entriesContainer = document.getElementById("entries-container");
-        const output = document.getElementById("output");
-        const uploadInput = document.getElementById("upload-json");
+        const jsonInput = document.getElementById('jsonInput');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const uploadInput = document.getElementById('uploadInput');
 
-        // Add new entry
-        document.getElementById("add-entry").addEventListener("click", () => {
-            const entry = document.createElement("div");
-            entry.className = "entry";
-            entry.innerHTML = `
-                <label>Name: <input type="text" class="name"></label><br>
-                <label>URL: <input type="text" class="url"></label><br>
-                <label>Tags (comma-separated): <input type="text" class="tags"></label><br>
-                <label>Invisible Tags (comma-separated): <input type="text" class="inviTags"></label><br>
-                <button class="remove-entry">Remove</button>
-            `;
-            entry.querySelector(".remove-entry").addEventListener("click", () => entry.remove());
-            entriesContainer.appendChild(entry);
+        // Download JSON file
+        downloadBtn.addEventListener('click', () => {
+            const jsonData = jsonInput.value;
+            try {
+                JSON.parse(jsonData); // Validate JSON
+                const blob = new Blob([jsonData], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'data.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } catch (error) {
+                alert('Invalid JSON data. Please check your input.');
+            }
         });
 
-        // Generate JSON
-        document.getElementById("generate-json").addEventListener("click", () => {
-            const entries = [];
-            entriesContainer.querySelectorAll(".entry").forEach(entry => {
-                const name = entry.querySelector(".name").value.trim();
-                const url = entry.querySelector(".url").value.trim();
-                const tags = entry.querySelector(".tags").value.split(",").map(tag => tag.trim());
-                const inviTags = entry.querySelector(".inviTags").value.split(",").map(tag => tag.trim());
-                if (name && url) {
-                    entries.push({ name, url, tags, inviTags });
-                }
-            });
-            const jsonString = JSON.stringify(entries, null, 4);
-            output.value = jsonString;
-        });
-
-        // Download JSON
-        document.getElementById("download-json").addEventListener("click", () => {
-            const blob = new Blob([output.value], { type: "application/json" });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = "entries.json";
-            link.click();
-        });
-
-        // Upload JSON
-        document.getElementById("upload-btn").addEventListener("click", () => {
-            uploadInput.click();
-        });
-
-        uploadInput.addEventListener("change", (event) => {
+        // Upload JSON file
+        uploadInput.addEventListener('change', (event) => {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = () => {
+                reader.onload = (e) => {
                     try {
-                        const data = JSON.parse(reader.result);
-                        if (Array.isArray(data)) {
-                            entriesContainer.innerHTML = ""; // Clear existing entries
-                            data.forEach(item => {
-                                const entry = document.createElement("div");
-                                entry.className = "entry";
-                                entry.innerHTML = `
-                                    <label>Name: <input type="text" class="name" value="${item.name || ""}"></label><br>
-                                    <label>URL: <input type="text" class="url" value="${item.url || ""}"></label><br>
-                                    <label>Tags (comma-separated): <input type="text" class="tags" value="${(item.tags || []).join(", ")}"></label><br>
-                                    <label>Invisible Tags (comma-separated): <input type="text" class="inviTags" value="${(item.inviTags || []).join(", ")}"></label><br>
-                                    <button class="remove-entry">Remove</button>
-                                `;
-                                entry.querySelector(".remove-entry").addEventListener("click", () => entry.remove());
-                                entriesContainer.appendChild(entry);
-                            });
-                        } else {
-                            alert("Invalid JSON format. Expected an array of objects.");
-                        }
-                    } catch (e) {
-                        alert("Error parsing JSON file.");
+                        const jsonData = JSON.parse(e.target.result);
+                        jsonInput.value = JSON.stringify(jsonData, null, 2); // Beautify JSON
+                    } catch (error) {
+                        alert('Invalid JSON file.');
                     }
                 };
                 reader.readAsText(file);
