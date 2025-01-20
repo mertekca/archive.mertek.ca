@@ -22,15 +22,38 @@ function addEntry() {
         <label>Invisible Tags (comma-separated): <input type="text" class="inviTags"></label><br>
         <button class="remove-entry">Remove</button>
     `;
-    entry.querySelector(".remove-entry").addEventListener("click", () => {
+    const removeButton = entry.querySelector(".remove-entry");
+
+    // Disable the remove button if only one entry exists
+    if (entriesContainer.children.length <= 1) {
+        removeButton.disabled = true;
+        removeButton.style.backgroundColor = "#ccc"; // Grey out the button
+        removeButton.style.cursor = "not-allowed"; // Prevent cursor from showing clickable
+    }
+
+    removeButton.addEventListener("click", () => {
         if (entriesContainer.children.length > 1) {
             entry.remove(); // Remove only if more than one entry exists
-        } else {
-            alert("Cannot delete the last entry!");
         }
     });
     entriesContainer.appendChild(entry);
 }
+
+// Update entry count and disable remove button if necessary
+entriesContainer.addEventListener("DOMSubtreeModified", () => {
+    const removeButtons = document.querySelectorAll(".remove-entry");
+    removeButtons.forEach((button) => {
+        if (entriesContainer.children.length <= 1) {
+            button.disabled = true;
+            button.style.backgroundColor = "#ccc"; // Grey out the button
+            button.style.cursor = "not-allowed"; // Prevent cursor from showing clickable
+        } else {
+            button.disabled = false;
+            button.style.backgroundColor = ""; // Reset button color
+            button.style.cursor = ""; // Reset cursor style
+        }
+    });
+});
 
 // Generate JSON
 document.getElementById("generate-json").addEventListener("click", () => {
