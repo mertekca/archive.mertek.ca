@@ -2,9 +2,9 @@
 async function loadFiles() {
     try {
         // Fetch the JSON file
-        const response = await fetch('files.json');
+        const response = await fetch('entries.json');
         if (!response.ok) {
-            throw new Error('Failed to load files.json');
+            throw new Error('Failed to load entries.json');
         }
 
         // Parse the JSON data
