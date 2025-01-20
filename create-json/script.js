@@ -20,36 +20,37 @@ function addEntry() {
         <label>URL: <input type="text" class="url"></label><br>
         <label>Tags (comma-separated): <input type="text" class="tags"></label><br>
         <label>Invisible Tags (comma-separated): <input type="text" class="inviTags"></label><br>
-        <button class="remove-entry" ${entriesContainer.children.length <= 1 ? "disabled" : ""}>Remove</button>
+        <button class="remove-entry">Remove</button>
     `;
     const removeButton = entry.querySelector(".remove-entry");
 
-    // Disable or enable button depending on entry count
-    if (entriesContainer.children.length <= 1) {
-        removeButton.disabled = true;
-        removeButton.style.backgroundColor = "#ccc"; // Grey out the button
-    }
+    // Disable remove button if only one entry exists
+    updateRemoveButtonState();
 
     removeButton.addEventListener("click", () => {
         if (entriesContainer.children.length > 1) {
             entry.remove(); // Remove only if more than one entry exists
+            updateRemoveButtonState(); // Update the button state after removal
         }
     });
-
     entriesContainer.appendChild(entry);
 }
 
-// Keep the remove buttons updated when entries change
-entriesContainer.addEventListener("DOMSubtreeModified", () => {
+// Update the state of remove buttons
+function updateRemoveButtonState() {
     const removeButtons = document.querySelectorAll(".remove-entry");
-    removeButtons.forEach((button) => {
+    removeButtons.forEach(button => {
         if (entriesContainer.children.length <= 1) {
-            button.disabled = true;  // Disable button if only one entry exists
+            button.disabled = true;
+            button.style.backgroundColor = "#ccc"; // Grey out the button
+            button.style.cursor = "not-allowed"; // Prevent cursor from showing clickable
         } else {
-            button.disabled = false; // Enable button if there are multiple entries
+            button.disabled = false;
+            button.style.backgroundColor = ""; // Reset button color
+            button.style.cursor = ""; // Reset cursor style
         }
     });
-});
+}
 
 // Generate JSON
 document.getElementById("generate-json").addEventListener("click", () => {
@@ -110,6 +111,7 @@ uploadInput.addEventListener("change", (event) => {
                         entry.querySelector(".remove-entry").addEventListener("click", () => entry.remove());
                         entriesContainer.appendChild(entry);
                     });
+                    updateRemoveButtonState(); // Recheck button state after loading JSON
                 } else {
                     alert("Invalid JSON format. Expected an array of objects.");
                 }
