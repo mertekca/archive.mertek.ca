@@ -24,16 +24,17 @@ function addEntry() {
     `;
     const removeButton = entry.querySelector(".remove-entry");
 
-    // Disable remove button if only one entry exists
-    updateRemoveButtonState();
-
+    // Add event listener to the remove button
     removeButton.addEventListener("click", () => {
         if (entriesContainer.children.length > 1) {
             entry.remove(); // Remove only if more than one entry exists
-            updateRemoveButtonState(); // Update the button state after removal
+            updateRemoveButtonState(); // Update button state after removal
         }
     });
+
     entriesContainer.appendChild(entry);
+
+    updateRemoveButtonState(); // Update button state after adding an entry
 }
 
 // Update the state of remove buttons
