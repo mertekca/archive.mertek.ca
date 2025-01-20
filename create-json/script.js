@@ -37,18 +37,17 @@ function addEntry() {
         }
     });
     entriesContainer.appendChild(entry);
-    checkRemoveButtons(); // Check buttons after adding an entry
+
+    updateRemoveButtonState(); // Update remove button states on each new entry
 }
 
 // Update entry count and disable remove button if necessary
-entriesContainer.addEventListener("DOMSubtreeModified", checkRemoveButtons);
-
-function checkRemoveButtons() {
+function updateRemoveButtonState() {
     const removeButtons = document.querySelectorAll(".remove-entry");
     removeButtons.forEach((button) => {
         if (entriesContainer.children.length <= 1) {
             button.disabled = true;
-            button.style.backgroundColor = "#ccc"; // Force greyed-out style
+            button.style.backgroundColor = "#ccc"; // Grey out the button
             button.style.cursor = "not-allowed"; // Prevent cursor from showing clickable
         } else {
             button.disabled = false;
