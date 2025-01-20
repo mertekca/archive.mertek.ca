@@ -2,7 +2,7 @@
 async function loadFiles() {
     try {
         // Fetch the JSON file
-        const response = await fetch('entries.json');
+        const response = await fetch('https://archive.mertek.ca/files/website/entries.json');
         if (!response.ok) {
             throw new Error('Failed to load entries.json');
         }
