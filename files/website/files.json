@@ -1,4 +1,4 @@
-const files = [
+[
     { 
         "name": "First Day",
         "url": "/files/first-day/", 
