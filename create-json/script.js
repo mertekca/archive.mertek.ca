@@ -20,15 +20,14 @@ function addEntry() {
         <label>URL: <input type="text" class="url"></label><br>
         <label>Tags (comma-separated): <input type="text" class="tags"></label><br>
         <label>Invisible Tags (comma-separated): <input type="text" class="inviTags"></label><br>
-        <button class="remove-entry">Remove</button>
+        <button class="remove-entry" ${entriesContainer.children.length <= 1 ? "disabled" : ""}>Remove</button>
     `;
     const removeButton = entry.querySelector(".remove-entry");
 
-    // Disable the remove button if only one entry exists
+    // Disable or enable button depending on entry count
     if (entriesContainer.children.length <= 1) {
         removeButton.disabled = true;
         removeButton.style.backgroundColor = "#ccc"; // Grey out the button
-        removeButton.style.cursor = "not-allowed"; // Prevent cursor from showing clickable
     }
 
     removeButton.addEventListener("click", () => {
@@ -36,26 +35,21 @@ function addEntry() {
             entry.remove(); // Remove only if more than one entry exists
         }
     });
-    entriesContainer.appendChild(entry);
 
-    updateRemoveButtonState(); // Update remove button states on each new entry
+    entriesContainer.appendChild(entry);
 }
 
-// Update entry count and disable remove button if necessary
-function updateRemoveButtonState() {
+// Keep the remove buttons updated when entries change
+entriesContainer.addEventListener("DOMSubtreeModified", () => {
     const removeButtons = document.querySelectorAll(".remove-entry");
     removeButtons.forEach((button) => {
         if (entriesContainer.children.length <= 1) {
-            button.disabled = true;
-            button.style.backgroundColor = "#ccc"; // Grey out the button
-            button.style.cursor = "not-allowed"; // Prevent cursor from showing clickable
+            button.disabled = true;  // Disable button if only one entry exists
         } else {
-            button.disabled = false;
-            button.style.backgroundColor = ""; // Reset button color
-            button.style.cursor = ""; // Reset cursor style
+            button.disabled = false; // Enable button if there are multiple entries
         }
     });
-}
+});
 
 // Generate JSON
 document.getElementById("generate-json").addEventListener("click", () => {
