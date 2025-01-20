@@ -47,6 +47,14 @@ document.getElementById("upload-btn").addEventListener("click", () => {
     uploadInput.click();
 });
 
+// Copy to Clipboard
+document.getElementById("copy-btn").addEventListener("click", () => {
+    const outputText = document.getElementById("output");
+    outputText.select();
+    document.execCommand("copy"); // Copies the text
+    alert("JSON copied to clipboard!");
+});
+
 uploadInput.addEventListener("change", (event) => {
     const file = event.target.files[0];
     if (file) {
