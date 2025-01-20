@@ -1,146 +1,38 @@
-// Sample file metadata (in a real project, this could be loaded from a JSON file)
-const files = [
-    { 
-        "name": "First Day",
-        "url": "/files/first-day/", 
-        "tags": ["memoir", "beginnings"],
-        "inviTags": ["school", "student", "new beginnings"]
-    },
-    { 
-        "name": "Volcanic Eruptions", 
-        "url": "/files/volcanic-eruptions/",
-        "tags": ["disaster", "explosive"],
-        "inviTags": ["nature", "eruption", "lava"]
-    },
-    {
-        "name": "Unknown Journey",
-        "url": "/files/unknown-journey/",
-        "tags": ["journey", "mystery"],
-        "inviTags": ["exploration", "unknown", "adventure"]
-    },
-    {
-        "name": "Memoirs of a Wanderer",
-        "url": "/files/memoirs-of-a-wanderer/",
-        "tags": ["memoir", "adventure"],
-        "inviTags": ["travel", "life journey", "wanderlust"]
-    },
-    {
-        "name": "The Grand Voyage",
-        "url": "/files/the-grand-voyage/",
-        "tags": ["voyage", "epic"],
-        "inviTags": ["sea", "exploration", "journey"]
-    },
-    {
-        "name": "Tales of the Sea",
-        "url": "/files/tales-of-the-sea/",
-        "tags": ["sea", "adventure"],
-        "inviTags": ["ocean", "exploration", "stories"]
-    },
-    {
-        "name": "The Last Recollection",
-        "url": "/files/the-last-recollection/",
-        "tags": ["memoir", "reflection"],
-        "inviTags": ["memory", "thoughts", "past"]
-    },
-    {
-        "name": "Exploration of the Wild",
-        "url": "/files/exploration-of-the-wild/",
-        "tags": ["exploration", "nature"],
-        "inviTags": ["adventure", "wilderness", "discovery"]
-    },
-    {
-        "name": "Epic of the Lost City",
-        "url": "/files/epic-of-the-lost-city/",
-        "tags": ["epic", "mystery"],
-        "inviTags": ["ancient", "lost city", "history"]
-    },
-    {
-        "name": "A Personal Quest",
-        "url": "/files/a-personal-quest/",
-        "tags": ["quest", "journey"],
-        "inviTags": ["adventure", "self-discovery", "challenge"]
-    },
-    {
-        "name": "Adventures in Time",
-        "url": "/files/adventures-in-time/",
-        "tags": ["adventure", "time"],
-        "inviTags": ["history", "time travel", "journey"]
-    },
-    {
-        "name": "Uncharted Worlds",
-        "url": "/files/uncharted-worlds/",
-        "tags": ["exploration", "space"],
-        "inviTags": ["discovery", "outer space", "adventure"]
-    },
-    {
-        "name": "The Great Expedition",
-        "url": "/files/the-great-expedition/",
-        "tags": ["expedition", "discovery"],
-        "inviTags": ["journey", "adventure", "exploration"]
-    },
-    {
-        "name": "Reflections of the Past",
-        "url": "/files/reflections-of-the-past/",
-        "tags": ["reflection", "history"],
-        "inviTags": ["memory", "historical", "thoughts"]
-    },
-    {
-        "name": "Echoes of the Journey",
-        "url": "/files/echoes-of-the-journey/",
-        "tags": ["journey", "echoes"],
-        "inviTags": ["adventure", "life", "memories"]
-    },
-    {
-        "name": "Legends of the Lost",
-        "url": "/files/legends-of-the-lost/",
-        "tags": ["legends", "myth"],
-        "inviTags": ["mythology", "history", "mystery"]
-    },
-    {
-        "name": "Into the Wild Unknown",
-        "url": "/files/into-the-wild-unknown/",
-        "tags": ["wild", "adventure"],
-        "inviTags": ["wilderness", "exploration", "unknown"]
-    },
-    {
-        "name": "The Chronicles",
-        "url": "/files/the-chronicles/",
-        "tags": ["chronicles", "document"],
-        "inviTags": ["stories", "records", "history"]
-    },
-    {
-        "name": "Quest for the Forgotten",
-        "url": "/files/quest-for-the-forgotten/",
-        "tags": ["quest", "forgotten"],
-        "inviTags": ["adventure", "search", "mystery"]
-    },
-    {
-        "name": "Sailing Through Time",
-        "url": "/files/sailing-through-time/",
-        "tags": ["time", "sailing"],
-        "inviTags": ["history", "journey", "ocean"]
-    },
-    {
-        "name": "The Mysterious Voyage",
-        "url": "/files/the-mysterious-voyage/",
-        "tags": ["mysterious", "voyage"],
-        "inviTags": ["sea", "adventure", "unknown"]
-    },
-    {
-        "name": "Whispers from the Past",
-        "url": "/files/whispers-from-the-past/",
-        "tags": ["whispers", "history"],
-        "inviTags": ["memory", "historical", "echoes"]
-    }
-];
+// Function to fetch the JSON data and initialize the file list
+async function loadFiles() {
+    try {
+        // Fetch the JSON file
+        const response = await fetch('files.json');
+        if (!response.ok) {
+            throw new Error('Failed to load files.json');
+        }
 
-// Function to filter files based on search query
-function searchFiles() {
+        // Parse the JSON data
+        const files = await response.json();
+
+        // Display files
+        displayFiles(files);
+
+        // Listen for input changes and trigger search
+        document.getElementById('searchBar').addEventListener('input', () => {
+            searchFiles(files);
+        });
+
+        // Initial display of all files
+        searchFiles(files);
+    } catch (error) {
+        console.error('Error loading files:', error);
+        document.getElementById('fileList').innerHTML = '<p>Failed to load files.</p>';
+    }
+}
+
+// Function to filter and display files based on search query
+function searchFiles(files) {
     const query = document.getElementById('searchBar').value.toLowerCase();
     let filteredFiles = files.filter(file => 
         file.name.toLowerCase().includes(query) || 
-        file.tags.some(tag => tag.toLowerCase().includes(query)) || 
-        (file.inviTags && file.inviTags.some(tag => tag.toLowerCase().includes(query)))
+        file.tags.some(tag => tag.toLowerCase().includes(query)) ||
+        file.inviTags.some(tag => tag.toLowerCase().includes(query))
     );
 
     // Sort files alphabetically by name
@@ -163,8 +55,22 @@ function searchFiles() {
     });
 }
 
-// Listen for input changes and trigger search
-document.getElementById('searchBar').addEventListener('input', searchFiles);
+// Function to display files initially
+function displayFiles(files) {
+    const fileList = document.getElementById('fileList');
+    fileList.innerHTML = ''; // Clear previous results
 
-// Initial display of all files
-searchFiles();
+    files.forEach(file => {
+        const a = document.createElement('a');
+        a.href = file.url;
+        a.classList.add('file-item');
+        a.innerHTML = `
+            <div>${file.name}</div>
+            <small>(${file.tags.join(', ')})</small>
+        `;
+        fileList.appendChild(a);
+    });
+}
+
+// Load files on page load
+loadFiles();
