@@ -1,24 +1,18 @@
 // Function to fetch the JSON data and initialize the file list
-async function loadFiles(selectedFile) {
+async function loadFiles(fileUrl = 'https://archive.mertek.ca/files/website/entries.json') {
     try {
-        // Fetch the JSON file based on selection
-        const response = await fetch(selectedFile);
+        const response = await fetch(fileUrl);
         if (!response.ok) {
-            throw new Error(`Failed to load ${selectedFile}`);
+            throw new Error(`Failed to load ${fileUrl}`);
         }
 
-        // Parse the JSON data
         const files = await response.json();
-
-        // Display files
         displayFiles(files);
 
-        // Listen for input changes and trigger search
         document.getElementById('searchBar').addEventListener('input', () => {
             searchFiles(files);
         });
 
-        // Initial display of all files
         searchFiles(files);
     } catch (error) {
         console.error('Error loading files:', error);
@@ -29,36 +23,35 @@ async function loadFiles(selectedFile) {
 // Function to filter and display files based on search query
 function searchFiles(files) {
     const query = document.getElementById('searchBar').value.toLowerCase();
-    let filteredFiles = files.filter(file => 
-        file.name.toLowerCase().includes(query) || 
+    const filteredFiles = files.filter(file =>
+        file.name.toLowerCase().includes(query) ||
         file.tags.some(tag => tag.toLowerCase().includes(query)) ||
         file.inviTags.some(tag => tag.toLowerCase().includes(query))
     );
 
-    // Sort files alphabetically by name
-    filteredFiles = filteredFiles.sort((a, b) => a.name.localeCompare(b.name));
-
-    // Get the file list container
     const fileList = document.getElementById('fileList');
-    fileList.innerHTML = ''; // Clear previous results
+    fileList.innerHTML = '';
 
-    // Display matching files
-    filteredFiles.forEach(file => {
-        const a = document.createElement('a');
-        a.href = file.url;
-        a.classList.add('file-item'); // Apply styling
-        a.innerHTML = `
-            <div>${file.name}</div>
-            <small>(${file.tags.join(', ')})</small>
-        `;
-        fileList.appendChild(a);
-    });
+    if (filteredFiles.length > 0) {
+        filteredFiles.forEach(file => {
+            const a = document.createElement('a');
+            a.href = file.url;
+            a.classList.add('file-item');
+            a.innerHTML = `
+                <div>${file.name}</div>
+                <small>(${file.tags.join(', ')})</small>
+            `;
+            fileList.appendChild(a);
+        });
+    } else {
+        document.getElementById('noResults').style.display = 'block';
+    }
 }
 
 // Function to display files initially
 function displayFiles(files) {
     const fileList = document.getElementById('fileList');
-    fileList.innerHTML = ''; // Clear previous results
+    fileList.innerHTML = '';
 
     files.forEach(file => {
         const a = document.createElement('a');
@@ -72,15 +65,37 @@ function displayFiles(files) {
     });
 }
 
-// Load files when a new file is selected
-document.addEventListener('DOMContentLoaded', () => {
-    const fileSelector = document.getElementById('fileSelector');
+// Event listener for dropdown selection
+document.getElementById('fileSelector').addEventListener('change', (event) => {
+    const selectedOption = event.target.value;
 
-    // Load the default file on page load
-    loadFiles(fileSelector.value);
-
-    // Listen for changes in the dropdown
-    fileSelector.addEventListener('change', () => {
-        loadFiles(fileSelector.value);
-    });
+    if (selectedOption === 'upload') {
+        document.getElementById('uploadInput').click();
+    } else {
+        loadFiles(selectedOption);
+    }
 });
+
+// Handle file upload
+document.getElementById('uploadInput').addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            try {
+                const data = JSON.parse(reader.result);
+                if (Array.isArray(data)) {
+                    displayFiles(data);
+                } else {
+                    alert('Invalid JSON format. Expected an array of objects.');
+                }
+            } catch (e) {
+                alert('Error parsing JSON file.');
+            }
+        };
+        reader.readAsText(file);
+    }
+});
+
+// Initialize with the default file
+loadFiles();
