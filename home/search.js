@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    async function loadFiles() {
+    async function loadFiles(url) {
         try {
-            const response = await fetch('https://archive.mertek.ca/files/website/json-files/school.json');
-            if (!response.ok) throw new Error('Failed to load school.json');
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Failed to load JSON file.');
 
             const files = await response.json();
             displayFiles(files);
@@ -62,5 +62,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    loadFiles();
+    // Event listener to load selected files
+    document.getElementById('fileSelector').addEventListener('change', (event) => {
+        const selectedFile = event.target.files[0];
+        if (selectedFile) {
+            loadFiles(URL.createObjectURL(selectedFile));
+        }
+    });
+
+    loadFiles('https://archive.mertek.ca/files/website/entries.json'); // Initial load
 });
