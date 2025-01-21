@@ -1,5 +1,5 @@
 // Function to fetch the JSON data and initialize the file list
-async function loadFiles(fileUrl = 'https://archive.mertek.ca/files/website/entries.json') {
+async function loadFiles(fileUrl = 'https://archive.mertek.ca/home/json-files/main.json') {
     try {
         const response = await fetch(fileUrl);
         if (!response.ok) {
