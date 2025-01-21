@@ -6,14 +6,20 @@
     <title>Home</title>
     <link rel="stylesheet" href="/files/website/style.css">
     <link rel="icon" href="/files/website/favicon.ico" type="image/x-icon">
-    <meta name="description" content="Search and explore free writes.">
-    <meta name="keywords" content="search, free writes, documents, PDF">
-    <meta name="author" content="Your Name">
 </head>
 <body>
-    
     <div class="content-wrapper">
         <h1>Search for Files</h1>
+
+        <!-- Dropdown for selecting JSON files -->
+        <label for="fileSelector">Choose a file:</label>
+        <select id="fileSelector">
+            <option value="school.json" selected>School Projects</option>
+            <option value="archive.json">Archived Files</option>
+            <option value="other.json">Other Entries</option>
+        </select>
+
+        <!-- Search bar -->
         <input type="text" id="searchBar" placeholder="Search files..." />
         <div id="fileList" class="file-list" role="list"></div>
         <p id="noResults" class="no-results" style="display:none;">No files found.</p>
