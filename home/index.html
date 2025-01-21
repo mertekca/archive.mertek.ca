@@ -4,22 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="/files/website/style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="/files/website/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <div class="content-wrapper">
         <h1>Search for Files</h1>
-
-        <!-- Dropdown for selecting JSON files -->
-        <label for="fileSelector">Choose a file:</label>
+        
+        <!-- Dropdown to select JSON file -->
         <select id="fileSelector">
-            <option value="school.json" selected>School Projects</option>
-            <option value="test.json">Test Files</option>
-            <option value="other.json">Other Entries</option>
+            <option value="https://archive.mertek.ca/home/json-files/Main.json">Main Files</option>
+            <option value="https://archive.mertek.ca/home/json-files/school.json">School Projects</option>
+            <option value="https://archive.mertek.ca/home/json-files/test.json">Test File</option>
         </select>
 
-        <!-- Search bar -->
         <input type="text" id="searchBar" placeholder="Search files..." />
         <div id="fileList" class="file-list" role="list"></div>
         <p id="noResults" class="no-results" style="display:none;">No files found.</p>
@@ -29,6 +27,6 @@
         <p>&copy; MerTek Archive Site 2025</p>
     </footer>
 
-    <script src="/home/search.js"></script>
+    <script src="search.js"></script>
 </body>
 </html>
