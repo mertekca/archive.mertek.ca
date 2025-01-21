@@ -1,5 +1,5 @@
 // Function to fetch the JSON data and initialize the file list
-async function loadFiles(filePath = 'https://archive.mertek.ca/files/website/entries.json') {
+async function loadFiles(filePath = 'https://archive.mertek.ca/files/website/school.json') {
     try {
         const response = await fetch(filePath);
         if (!response.ok) throw new Error(`Failed to load ${filePath}`);
