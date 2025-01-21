@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     async function loadFiles() {
         try {
-            const response = await fetch('https://archive.mertek.ca/files/website/school.json');
+            const response = await fetch('https://archive.mertek.ca/files/website/json-files/school.json');
             if (!response.ok) throw new Error('Failed to load school.json');
 
             const files = await response.json();
