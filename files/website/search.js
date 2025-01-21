@@ -2,7 +2,7 @@
 async function loadFiles(selectedFile = 'school.json') {
     try {
         // Fetch the selected JSON file
-        const response = await fetch(`https://archive.mertek.ca/files/website/${selectedFile}`);
+        const response = await fetch(`https://archive.mertek.ca/files/website/json-files/${selectedFile}`);
         if (!response.ok) {
             throw new Error(`Failed to load ${selectedFile}`);
         }
