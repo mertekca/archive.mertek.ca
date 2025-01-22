@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="content-wrapper">
+        <h1>Privacy Policy</h1>
+
+        <p>Your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and protect your information when you visit our website.</p>
+
+        <h2>Information We Collect</h2>
+        <ul>
+            <li><strong>Personal Information:</strong> This may include your name, email address, and other details provided during account creation or contact forms.</li>
+            <li><strong>Usage Data:</strong> We may collect information about how you interact with our website, such as pages visited, time spent, and browser type.</li>
+        </ul>
+
+        <h2>How We Use Your Information</h2>
+        <ul>
+            <li>To provide, operate, and maintain our website.</li>
+            <li>To improve user experience and understand user behavior.</li>
+            <li>To communicate with you about updates, services, and promotional content.</li>
+        </ul>
+
+        <h2>Sharing Your Information</h2>
+        <p>We do not sell your personal data to third parties. We may share data with service providers who assist in operating our website or as required by law.</p>
+
+        <h2>Data Security</h2>
+        <p>We take reasonable measures to protect your data against unauthorized access, loss, or misuse. However, no online platform can guarantee 100% security.</p>
+
+        <h2>Your Choices</h2>
+        <ul>
+            <li>You can opt out of promotional emails by following the unsubscribe instructions in those emails.</li>
+            <li>You may request access to, or deletion of, your personal data by contacting us.</li>
+        </ul>
+
+        <h2>Children's Privacy</h2>
+        <p>Our website is not intended for individuals under the age of 13. We do not knowingly collect personal information from children.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective date.</p>
+
+        <h2>Contact Us</h2>
+        <p>If you have questions about this Privacy Policy, please contact us at <a href="mailto:example@example.com">example@example.com</a>.</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 MerTek Archive Site</p>
+    </footer>
+</body>
+</html>
