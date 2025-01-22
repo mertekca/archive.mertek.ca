@@ -32,33 +32,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Search Files
-    function searchFiles(files) {
-        const query = searchBar.value.toLowerCase();
-        const filteredFiles = files.filter(file =>
-            file.name.toLowerCase().includes(query) ||
-            file.tags.some(tag => tag.toLowerCase().includes(query)) ||
-            file.inviTags.some(tag => tag.toLowerCase().includes(query))
-        );
+function searchFiles(files) {
+    const query = searchBar.value.toLowerCase();
+    const filteredFiles = files.filter(file =>
+        file.name.toLowerCase().includes(query) ||
+        file.tags.some(tag => tag.toLowerCase().includes(query)) ||
+        file.inviTags.some(tag => tag.toLowerCase().includes(query))
+    );
 
-        const fileList = document.getElementById('fileList');
-        fileList.innerHTML = '';
+    const fileList = document.getElementById('fileList');
+    const noResults = document.getElementById('noResults');
+    fileList.innerHTML = '';
 
-        if (filteredFiles.length > 0) {
-            filteredFiles.forEach(file => {
-                const a = document.createElement('a');
-                a.href = file.url;
-                a.classList.add('file-item');
-                a.innerHTML = `
-                    <div>${file.name}</div>
-                    <small>(${file.tags.join(', ')})</small>
-                `;
-                fileList.appendChild(a);
-            });
-        } else {
-            document.getElementById('noResults').style.display = 'block';
-        }
+    if (filteredFiles.length > 0) {
+        noResults.style.display = 'none'; // Hide "no results" message
+        filteredFiles.forEach(file => {
+            const a = document.createElement('a');
+            a.href = file.url;
+            a.classList.add('file-item');
+            a.innerHTML = `
+                <div>${file.name}</div>
+                <small>(${file.tags.join(', ')})</small>
+            `;
+            fileList.appendChild(a);
+        });
+    } else {
+        noResults.style.display = 'block'; // Show "no results" message
     }
-
+}
     // Display Files
     function displayFiles(files) {
         const fileList = document.getElementById('fileList');
