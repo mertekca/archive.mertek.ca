@@ -1,107 +1,92 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Dropdown and Search Bar Initialization
-    const dropdown = document.getElementById('fileSelector');
+    const dropdownMenu = document.getElementById('fileSelector');
     const searchBar = document.getElementById('searchBar');
+    const fileInput = document.getElementById('fileInput');
+    const noResults = document.getElementById('noResults');
+    const fileList = document.getElementById('fileList');
 
-    // Verify existence of elements
-    if (!dropdown || !searchBar) {
+    let lastSelectedFile = "https://archive.mertek.ca/home/json-files/main.json";
+
+    // Verify required elements
+    if (!dropdownMenu || !searchBar || !fileInput || !noResults || !fileList) {
         console.error('Required elements are missing.');
         return;
     }
 
-    // Load Files Function
-    async function loadFiles(fileUrl = 'https://archive.mertek.ca/home/json-files/main.json') {
+    // Load files from a given URL
+    async function loadFiles(fileUrl = lastSelectedFile) {
         try {
             const response = await fetch(fileUrl);
-            if (!response.ok) {
-                throw new Error(`Failed to load ${fileUrl}`);
-            }
+            if (!response.ok) throw new Error(`Failed to load ${fileUrl}`);
 
             const files = await response.json();
             displayFiles(files);
 
-            searchBar.addEventListener('input', () => {
-                searchFiles(files);
-            });
-
+            searchBar.addEventListener('input', () => searchFiles(files));
             searchFiles(files);
         } catch (error) {
             console.error('Error loading files:', error);
-            document.getElementById('fileList').innerHTML = '<p>Failed to load files.</p>';
+            fileList.innerHTML = '<p>Failed to load files.</p>';
         }
     }
 
-    // Search Files
-    function searchFiles(files) {
-        const query = searchBar.value.toLowerCase();
-        const filteredFiles = files.filter(file =>
-            file.name.toLowerCase().includes(query) ||
-            file.tags.some(tag => tag.toLowerCase().includes(query)) ||
-            file.inviTags.some(tag => tag.toLowerCase().includes(query))
-        );
-
-        const fileList = document.getElementById('fileList');
-        const noResults = document.getElementById('noResults');
-        fileList.innerHTML = '';
-    
-        if (filteredFiles.length > 0) {
-            noResults.style.display = 'none'; // Hide "no results" message
-            filteredFiles.forEach(file => {
-                const a = document.createElement('a');
-                a.href = file.url;
-                a.classList.add('file-item');
-                a.innerHTML = `
-                    <div>${file.name}</div>
-                    <small>(${file.tags.join(', ')})</small>
-                `;
-                fileList.appendChild(a);
-            });
-        } else {
-            noResults.style.display = 'block'; // Show "no results" message
-        }
-    }
-
-    // Display Files
+    // Display files
     function displayFiles(files) {
-        const fileList = document.getElementById('fileList');
         fileList.innerHTML = '';
-
         files.forEach(file => {
             const a = document.createElement('a');
             a.href = file.url;
             a.classList.add('file-item');
-            a.innerHTML = `
-                <div>${file.name}</div>
-                <small>(${file.tags.join(', ')})</small>
-            `;
+            a.innerHTML = `<div>${file.name}</div><small>(${file.tags.join(', ')})</small>`;
             fileList.appendChild(a);
         });
     }
 
-    // Handle the dropdown change event
-dropdownMenu.addEventListener("change", (event) => {
-    const selectedOption = event.target.value;
+    // Search files
+    function searchFiles(files) {
+        const query = searchBar.value.toLowerCase();
+        const filteredFiles = files.filter(file =>
+            file.name.toLowerCase().includes(query) ||
+            file.tags.some(tag => tag.toLowerCase().includes(query))
+        );
 
-    if (selectedOption === "upload") {
-        // Trigger file upload input
-        fileInput.click();
-        dropdownMenu.value = lastSelectedFile; // Reset to last selected file
-    } else {
-        // Switch files based on selection
-        lastSelectedFile = selectedOption; // Update last selected
-        loadFiles(selectedOption);
+        fileList.innerHTML = '';
+        if (filteredFiles.length > 0) {
+            noResults.style.display = 'none';
+            filteredFiles.forEach(file => {
+                const a = document.createElement('a');
+                a.href = file.url;
+                a.classList.add('file-item');
+                a.innerHTML = `<div>${file.name}</div><small>(${file.tags.join(', ')})</small>`;
+                fileList.appendChild(a);
+            });
+        } else {
+            noResults.style.display = 'block';
+        }
     }
-});
 
-// Handle file input change event
-    fileInput.addEventListener("change", (event) => {
+    // Handle dropdown changes
+    dropdownMenu.addEventListener('change', (event) => {
+        const selectedOption = event.target.value;
+
+        if (selectedOption === "upload") {
+            fileInput.click();
+            dropdownMenu.value = lastSelectedFile;
+        } else {
+            lastSelectedFile = selectedOption;
+            loadFiles(selectedOption);
+        }
+    });
+
+    // Handle file upload
+    fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = () => {
                 try {
                     const uploadedData = JSON.parse(reader.result);
-                    displayFiles(uploadedData); // Display uploaded data
+                    displayFiles(uploadedData);
                 } catch (error) {
                     alert("Invalid JSON format in the uploaded file.");
                 }
@@ -110,6 +95,6 @@ dropdownMenu.addEventListener("change", (event) => {
         }
     });
 
-    // Initial Load
+    // Initial load
     loadFiles();
 });
