@@ -2,8 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const dropdownMenu = document.getElementById("fileSelector");
     const searchBar = document.getElementById("searchBar");
     const fileInputTemplate = document.createElement("input");
-    let lastSelectedFile = "json-files/main.json"; // Default file
-    let uploadedFiles = {}; // Store uploaded files by their dropdown key
+    let uploadedFiles = {}; // Store uploaded files by dropdown key
     fileInputTemplate.type = "file";
     fileInputTemplate.accept = ".json"; // Restrict file types to JSON
 
@@ -98,13 +97,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const fileInput = fileInputTemplate.cloneNode();
                 fileInput.addEventListener("change", (e) => handleFileUpload(e, selectedOption));
                 fileInput.click();
-                dropdownMenu.value = lastSelectedFile; // Reset to last selected file
             }
-        } else if (selectedOption === "add") {
-            addUploadOption();
-            dropdownMenu.value = lastSelectedFile; // Reset to last selected file
         } else {
-            lastSelectedFile = selectedOption; // Update last selected
             loadFiles(selectedOption); // Load selected file
         }
     });
@@ -123,7 +117,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Update dropdown with the uploaded file name
                     const option = document.querySelector(`#fileSelector option[value="${key}"]`);
                     option.textContent = file.name;
-                    dropdownMenu.value = key; // Keep the upload option selected
+
+                    // Automatically add a new upload option
+                    addUploadOption();
                 } catch (error) {
                     alert("Invalid JSON format in the uploaded file.");
                 }
@@ -140,12 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = "Upload File";
         dropdownMenu.appendChild(option);
     }
-
-    // Add "Add Another File" option to dropdown
-    const addOption = document.createElement("option");
-    addOption.value = "add";
-    addOption.textContent = "Add Another File";
-    dropdownMenu.appendChild(addOption);
 
     // Initial load
     loadFiles();
