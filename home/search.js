@@ -71,15 +71,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle dropdown selection
     dropdown.addEventListener('change', (event) => {
         const selectedOption = event.target.value;
-
+    
         if (selectedOption === 'upload') {
             fileInput.click();
+            // Force the dropdown to display the last selected option
             dropdown.value = lastSelectedFile;
         } else {
             lastSelectedFile = selectedOption;
             loadFiles(selectedOption);
         }
     });
+
 
     // Handle file upload
     fileInput.addEventListener('change', (event) => {
