@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchBar = document.getElementById("searchBar");
     const fileInput = document.createElement("input");
     let lastSelectedFile = "json-files/main.json"; // Default file
+    let uploadedFileContent = null; // Store uploaded file content
     fileInput.type = "file";
     fileInput.accept = ".json"; // Restrict file types to JSON
 
@@ -88,8 +89,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const selectedOption = event.target.value;
 
         if (selectedOption === "upload") {
-            fileInput.click(); // Trigger file input
-            dropdownMenu.value = lastSelectedFile; // Reset to last selected file
+            if (uploadedFileContent) {
+                // Reload the uploaded file if available
+                displayFiles(uploadedFileContent);
+            } else {
+                // Trigger file input if no file was uploaded yet
+                fileInput.click();
+                dropdownMenu.value = lastSelectedFile; // Reset to last selected file
+            }
         } else {
             lastSelectedFile = selectedOption; // Update last selected
             loadFiles(selectedOption); // Load selected file
@@ -103,8 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const reader = new FileReader();
             reader.onload = () => {
                 try {
-                    const uploadedData = JSON.parse(reader.result);
-                    displayFiles(uploadedData); // Display uploaded data
+                    uploadedFileContent = JSON.parse(reader.result);
+                    displayFiles(uploadedFileContent); // Display uploaded data
 
                     // Update the dropdown to show the uploaded file name
                     const selectedOption = document.querySelector(
