@@ -78,29 +78,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Dropdown Change Handler
-    dropdown.addEventListener('change', () => {
-        const selectedFile = dropdown.value;
-        if (selectedFile === 'upload') {
-            // Handle file upload
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.json';
-            input.addEventListener('change', event => {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = e => {
-                        const files = JSON.parse(e.target.result);
-                        displayFiles(files);
-                    };
-                    reader.readAsText(file);
+    // Handle the dropdown change event
+dropdownMenu.addEventListener("change", (event) => {
+    const selectedOption = event.target.value;
+
+    if (selectedOption === "upload") {
+        // Trigger file upload input
+        fileInput.click();
+        dropdownMenu.value = lastSelectedFile; // Reset to last selected file
+    } else {
+        // Switch files based on selection
+        lastSelectedFile = selectedOption; // Update last selected
+        loadFiles(selectedOption);
+    }
+});
+
+// Handle file input change event
+    fileInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    const uploadedData = JSON.parse(reader.result);
+                    displayFiles(uploadedData); // Display uploaded data
+                } catch (error) {
+                    alert("Invalid JSON format in the uploaded file.");
                 }
-            });
-            input.click();
-        } else {
-            // Load selected file
-            loadFiles(selectedFile);
+            };
+            reader.readAsText(file);
         }
     });
 
