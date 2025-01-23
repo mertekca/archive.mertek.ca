@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <nav class="navbar">
             <ul class="nav-list">
                 <li><a href="/home" class="nav-link">Home</a></li>
-                <li><a href="/user-agreement" class="nav-link">About</a></li>
+                <li><a href="/user-agreement" class="nav-link">User Agreemnet</a></li>
                 <li><a href="/create-json" class="nav-link">Create FIleset</a></li>
             </ul>
         </nav>
