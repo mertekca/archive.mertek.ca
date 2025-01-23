@@ -29,12 +29,6 @@ h1 {
     color: #333;
 }
 
-/* Paragraph styling for descriptions */
-p {
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
 /* Links styling */
 a {
     color: #007bff;
@@ -64,4 +58,63 @@ footer a {
 
 footer a:hover {
     color: #ddd;
+}
+
+/* Search-specific styling */
+#searchBar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* File list styling */
+.file-list {
+    list-style: none;
+    padding: 0;
+}
+
+.file-item {
+    display: block;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: left;
+    background-color: #fff;
+}
+
+.file-item:hover {
+    background-color: #f0f8ff;
+}
+
+/* No results message */
+.no-results {
+    color: #888;
+    font-size: 18px;
+}
+
+/* Terms and Privacy Content */
+.terms-content, .privacy-content {
+    text-align: left;
+    margin: 20px auto;
+    line-height: 1.6;
+    max-width: 800px;
+}
+
+/* Button styling */
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
