@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="/home" class="nav-link">Home</a></li>
                 <li><a href="/user-agreement" class="nav-link">User Agreement</a></li>
                 <li><a href="/create-json" class="nav-link">Create File Set</a></li>
+                <li><a href="/log-in" class="nav-link">Log In</a></li>
             </ul>
         </nav>
     `;
