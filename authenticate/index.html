@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authenticating...</title>
+    <script src="https://accounts.google.com/gsi/client"></script>
+    <script>
+        window.onload = () => {
+            // Retrieve URL parameters
+            const params = new URLSearchParams(window.location.search);
+            const code = params.get('code');
+            const error = params.get('error');
+
+            if (error) {
+                console.error('Authentication failed:', error);
+                alert('Authentication failed. Please try again.');
+            } else if (code) {
+                console.log('Authentication successful. Code:', code);
+                // Send `code` to your backend for further validation and token exchange
+                // fetch('/api/verify-google-code', { method: 'POST', body: JSON.stringify({ code }) });
+            }
+        };
+    </script>
+</head>
+<body>
+    <h1>Processing Authentication...</h1>
+</body>
+</html>
