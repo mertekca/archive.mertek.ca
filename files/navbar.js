@@ -88,4 +88,5 @@ document.addEventListener('DOMContentLoaded', () => {
         </footer>
     `;
     document.body.insertAdjacentHTML('afterbegin', nav);
-    document.body.insertAdjacentHTML('beforeend', footer); // Ensure footer is at the
+    document.body.insertAdjacentHTML('beforeend', footer); // Ensure footer is at the end
+});
