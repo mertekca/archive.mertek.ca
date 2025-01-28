@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Add Navbar and Footer HTML
-    const layout = `
+    // Add Navbar HTML
+    const nav = `
         <style>
             html, body {
                 margin: 0;
@@ -62,15 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 border-top: 1px solid #444; /* Slightly lighter gray for top border */
                 width: 100%;
                 padding: 10px 0;
-                margin-top: auto; /* Pushes footer to the bottom */
+                margin-top: auto; /* Ensures footer stays at the bottom */
             }
 
-            /* Content wrapper */
+            /* Content container for flex behavior */
             .content-wrapper {
-                flex: 1; /* Ensures this takes up the remaining space */
-                padding: 20px; /* Optional padding for content */
-                display: flex;
-                flex-direction: column;
+                flex: 1; /* Allows this section to grow/shrink as needed */
+                padding: 20px; /* Optional padding for the content */
+                display: block; /* Content should flow normally */
             }
         </style>
         <nav class="navbar">
@@ -81,13 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="/log-in" class="nav-link">Log In</a></li>
             </ul>
         </nav>
-        <div class="content-wrapper">
-            <!-- Page-specific content will go here -->
-        </div>
+        <div class="content-wrapper"></div> <!-- Placeholder for page content -->
+    `;
+    const footer = `
         <footer>
             <p>&copy; MerTek Archive Site 2025</p>
         </footer>
     `;
-
-    document.body.insertAdjacentHTML('afterbegin', layout);
-});
+    document.body.insertAdjacentHTML('afterbegin', nav);
+    document.body.insertAdjacentHTML('beforeend', footer); // Ensure footer is at the
