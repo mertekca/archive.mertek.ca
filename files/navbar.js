@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     // Add Navbar HTML
     const nav = `
@@ -6,9 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
+                min-height: 100%;
             }
 
             body {
@@ -52,26 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .nav-link:hover {
                 color: #00aaff;
             }
-
-            /* Content wrapper adjusted to prevent overlap and add top padding */
-            .content-wraper {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                padding: 80px 20px 20px; /* 80px top padding to account for the navbar */
-            }
-
-            /* Footer styling */
-            footer {
-                background-color: #333;
-                color: #fff;
-                text-align: center;
-                font-size: 16px;
-                border-top: 1px solid #444;
-                width: 100%;
-                padding: 10px 0;
-            }
         </style>
         <nav class="navbar">
             <ul class="nav-list">
@@ -81,13 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="/log-in" class="nav-link">Log In</a></li>
             </ul>
         </nav>
-        <div class="content-wraper"></div> <!-- Placeholder for page content -->
-    `;
-    const footer = `
-        <footer>
-            <p>&copy; MerTek Archive Site 2025</p>
-        </footer>
     `;
     document.body.insertAdjacentHTML('afterbegin', nav);
-    document.body.insertAdjacentHTML('beforeend', footer);
 });
