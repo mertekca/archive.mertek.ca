@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="/log-in" class="nav-link">Log In</a></li>
             </ul>
         </nav>
-        <div class="main-container"></div> <!-- Placeholder for page content -->
+        <div class="content-wraper"></div> <!-- Placeholder for page content -->
     `;
     const footer = `
         <footer>
