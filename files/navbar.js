@@ -82,8 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
         </nav>
         <div class="content-wrapper">
-            <h1>Welcome to MerTek</h1>
-            <p>Your content goes here.</p>
+            <!-- Page-specific content will go here -->
         </div>
         <footer>
             <p>&copy; MerTek Archive Site 2025</p>
