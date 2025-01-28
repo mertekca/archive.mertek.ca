@@ -82,26 +82,3 @@ input[type="text"] {
     color: #666;
     font-size: 14px;
 }
-
-/* Footer styling */
-footer {
-    background-color: #333; /* Dark gray background */
-    color: #fff; /* White text color */
-    text-align: center;
-    font-size: 16px; /* Larger font size for visibility */
-    border-top: 1px solid #444; /* Slightly lighter gray for top border */
-    width: 100%;
-    position: relative;
-    margin-top: auto; /* Keeps the footer at the bottom */
-}
-
-/* Footer links */
-footer a {
-    color: #fff;
-    text-decoration: underline;
-}
-
-footer a:hover {
-    color: #ddd;
-    text-decoration: none;
-}
