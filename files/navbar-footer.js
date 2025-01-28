@@ -1,14 +1,99 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Create script tags for both external scripts
-    const script1 = document.createElement('script');
-    script1.src = '/files/navbar.js/';
-    script1.type = 'text/javascript';
+    // Add Navbar HTML
+    const nav = `
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                min-height: 100%;
+            }
 
-    const script2 = document.createElement('script');
-    script2.src = '/files/footer.js/';
-    script2.type = 'text/javascript';
+            body {
+                padding-top: 60px; /* Adjust based on navbar height */
+            }
 
-    // Append both scripts to the document body or head
-    document.body.appendChild(script1);
-    document.body.appendChild(script2);
+            .navbar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 60px; /* Adjust as needed */
+                background-color: #333;
+                color: white;
+                z-index: 1000;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-list {
+                list-style: none;
+                display: flex;
+                margin: 0;
+                padding: 0;
+            }
+
+            .nav-list li {
+                margin: 0 15px;
+            }
+
+            .nav-link {
+                color: white;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: bold;
+                transition: color 0.3s ease;
+            }
+
+            .nav-link:hover {
+                color: #00aaff;
+            }
+
+            footer {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                font-size: 16px;
+                border-top: 1px solid #444;
+                width: 100%;
+                padding: 10px 0;
+            }
+        </style>
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="/home" class="nav-link">Home</a></li>
+                <li><a href="/user-agreement" class="nav-link">User Agreement</a></li>
+                <li><a href="/create-json" class="nav-link">Create File Set</a></li>
+                <li><a href="/log-in" class="nav-link">Log In</a></li>
+            </ul>
+        </nav>
+    `;
+    
+    // Insert Navbar HTML into the body
+    document.body.insertAdjacentHTML('afterbegin', nav);
+
+    // Add Footer HTML
+    const footer = `
+        <style>
+            footer {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                font-size: 16px;
+                border-top: 1px solid #444;
+                width: 100%;
+                padding: 10px 0;
+                position: relative;
+                bottom: 0;
+            }
+        </style>
+        <footer>
+            <p>&copy; MerTek Archive Site 2025</p>
+        </footer>
+    `;
+    
+    // Insert Footer HTML into the body
+    document.body.insertAdjacentHTML('beforeend', footer);
 });
