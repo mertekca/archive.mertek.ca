@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 color: #00aaff;
             }
 
-            /* Automatically wrap page content */
+            /* Main container to push footer down */
             .main-container {
                 flex: 1;
                 display: flex;
@@ -81,25 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="/log-in" class="nav-link">Log In</a></li>
             </ul>
         </nav>
+        <div class="main-container"></div> <!-- Placeholder for page content -->
     `;
-    
     const footer = `
         <footer>
             <p>&copy; MerTek Archive Site 2025</p>
         </footer>
     `;
-
-    // Insert navbar at the top
     document.body.insertAdjacentHTML('afterbegin', nav);
-    
-    // Wrap existing content inside a div (main-container) to push the footer down
-    const mainContainer = document.createElement('div');
-    mainContainer.classList.add('main-container');
-    
-    while (document.body.childNodes.length > 1) {
-        mainContainer.appendChild(document.body.childNodes[1]); // Move all elements except the navbar
-    }
-
-    document.body.appendChild(mainContainer); // Add main container
-    document.body.appendChild(footer); // Insert footer at the bottom
+    document.body.insertAdjacentHTML('beforeend', footer);
 });
