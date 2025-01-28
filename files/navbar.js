@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Add Navbar HTML
-    const nav = `
+    // Add Navbar and Footer HTML
+    const layout = `
         <style>
             html, body {
                 margin: 0;
@@ -65,9 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 margin-top: auto; /* Pushes footer to the bottom */
             }
 
-            /* Content container for flex behavior */
+            /* Content wrapper */
             .content-wrapper {
-                flex: 1;
+                flex: 1; /* Ensures this takes up the remaining space */
+                padding: 20px; /* Optional padding for content */
             }
         </style>
         <nav class="navbar">
@@ -78,13 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="/log-in" class="nav-link">Log In</a></li>
             </ul>
         </nav>
-        <div class="content-wrapper"></div> <!-- Placeholder for page content -->
-    `;
-    const footer = `
+        <div class="content-wrapper">
+            <!-- Page content will go here -->
+        </div>
         <footer>
             <p>&copy; MerTek Archive Site 2025</p>
         </footer>
     `;
-    document.body.insertAdjacentHTML('afterbegin', nav);
-    document.body.insertAdjacentHTML('beforeend', footer); // Ensure footer is at the end
+
+    document.body.insertAdjacentHTML('afterbegin', layout);
 });
