@@ -1,17 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Add Navbar HTML
-    const nav = `
-        <script src="/files/navbar.js"></script>
-    `;
-    
-    // Insert Navbar HTML into the body
-    document.body.insertAdjacentHTML('afterbegin', nav);
+    // Dynamically load Navbar
+    const navbarScript = document.createElement('script');
+    navbarScript.src = 'navbar.js';
+    document.head.appendChild(navbarScript);
 
-    // Add Footer HTML
-    const footer = `
-        <script src="/files/footer.js"></script>
-    `;
-    
-    // Insert Footer HTML into the body
-    document.body.insertAdjacentHTML('beforeend', footer);
+    // Dynamically load Footer
+    const footerScript = document.createElement('script');
+    footerScript.src = 'footer.js';
+    document.head.appendChild(footerScript);
 });
