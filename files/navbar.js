@@ -53,8 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 color: #00aaff;
             }
 
-            /* Main container to push footer down */
-            .main-container {
+            .content-wraper {
                 flex: 1;
                 display: flex;
                 flex-direction: column;
