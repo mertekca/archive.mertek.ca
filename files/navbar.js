@@ -69,6 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .content-wrapper {
                 flex: 1; /* Ensures this takes up the remaining space */
                 padding: 20px; /* Optional padding for content */
+                display: flex;
+                flex-direction: column;
             }
         </style>
         <nav class="navbar">
@@ -80,7 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
         </nav>
         <div class="content-wrapper">
-            <!-- Page content will go here -->
+            <h1>Welcome to MerTek</h1>
+            <p>Your content goes here.</p>
         </div>
         <footer>
             <p>&copy; MerTek Archive Site 2025</p>
