@@ -53,12 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 color: #00aaff;
             }
 
+            /* Content wrapper adjusted to prevent overlap and add top padding */
             .content-wraper {
                 flex: 1;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
-                padding: 20px; /* Adjust as needed */
+                padding: 80px 20px 20px; /* 80px top padding to account for the navbar */
             }
 
             /* Footer styling */
