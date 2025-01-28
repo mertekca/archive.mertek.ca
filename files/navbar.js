@@ -62,7 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 border-top: 1px solid #444; /* Slightly lighter gray for top border */
                 width: 100%;
                 padding: 10px 0;
-                margin-top: auto; /* Keeps the footer at the bottom */
+                margin-top: auto; /* Pushes footer to the bottom */
+            }
+
+            /* Content container for flex behavior */
+            .content-wrapper {
+                flex: 1;
             }
         </style>
         <nav class="navbar">
@@ -73,9 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="/log-in" class="nav-link">Log In</a></li>
             </ul>
         </nav>
+        <div class="content-wrapper"></div> <!-- Placeholder for page content -->
+    `;
+    const footer = `
         <footer>
             <p>&copy; MerTek Archive Site 2025</p>
         </footer>
     `;
     document.body.insertAdjacentHTML('afterbegin', nav);
+    document.body.insertAdjacentHTML('beforeend', footer); // Ensure footer is at the end
 });
