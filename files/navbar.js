@@ -1,25 +1,13 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Add Navbar HTML
+    // Navbar HTML
     const nav = `
         <style>
-            html, body {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                min-height: 100%;
-            }
-
-            body {
-                padding-top: 60px; /* Adjust based on navbar height */
-            }
-
             .navbar {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
-                height: 60px; /* Adjust as needed */
+                height: 60px;
                 background-color: #333;
                 color: white;
                 z-index: 1000;
@@ -28,18 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 align-items: center;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
-
             .nav-list {
                 list-style: none;
                 display: flex;
                 margin: 0;
                 padding: 0;
             }
-
             .nav-list li {
                 margin: 0 15px;
             }
-
             .nav-link {
                 color: white;
                 text-decoration: none;
@@ -47,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 font-weight: bold;
                 transition: color 0.3s ease;
             }
-
             .nav-link:hover {
                 color: #00aaff;
             }
@@ -61,4 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
         </nav>
     `;
+
+    // Insert Navbar HTML into the body
+    document.body.insertAdjacentHTML('afterbegin', nav);
 });
