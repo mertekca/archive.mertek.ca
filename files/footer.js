@@ -18,7 +18,4 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>&copy; MerTek Archive Site 2025</p>
         </footer>
     `;
-    
-    // Insert the footer HTML into the body before the closing </body> tag
-    document.body.insertAdjacentHTML('beforeend', footer);
 });
