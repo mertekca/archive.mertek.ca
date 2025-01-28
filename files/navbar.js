@@ -61,5 +61,4 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
         </nav>
     `;
-    document.body.insertAdjacentHTML('afterbegin', nav);
 });
