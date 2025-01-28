@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add Footer HTML
     const footer = `
-        <script src="/files/navbar.js"></script>
+        <script src="/files/footer.js"></script>
     `;
     
     // Insert Footer HTML into the body
