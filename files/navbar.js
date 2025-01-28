@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 padding: 0;
                 box-sizing: border-box;
                 min-height: 100%;
+                display: flex;
+                flex-direction: column;
             }
 
             body {
@@ -50,6 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
             .nav-link:hover {
                 color: #00aaff;
             }
+
+            /* Footer styling */
+            footer {
+                background-color: #333; /* Dark gray background */
+                color: #fff; /* White text color */
+                text-align: center;
+                font-size: 16px; /* Larger font size for visibility */
+                border-top: 1px solid #444; /* Slightly lighter gray for top border */
+                width: 100%;
+                padding: 10px 0;
+                margin-top: auto; /* Keeps the footer at the bottom */
+            }
         </style>
         <nav class="navbar">
             <ul class="nav-list">
@@ -59,6 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="/log-in" class="nav-link">Log In</a></li>
             </ul>
         </nav>
+        <footer>
+            <p>&copy; MerTek Archive Site 2025</p>
+        </footer>
     `;
     document.body.insertAdjacentHTML('afterbegin', nav);
 });
