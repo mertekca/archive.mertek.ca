@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
-                min-height: 100%;
+                min-height: 100vh;
                 display: flex;
                 flex-direction: column;
             }
@@ -53,23 +53,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 color: #00aaff;
             }
 
-            /* Footer styling */
-            footer {
-                background-color: #333; /* Dark gray background */
-                color: #fff; /* White text color */
-                text-align: center;
-                font-size: 16px; /* Larger font size for visibility */
-                border-top: 1px solid #444; /* Slightly lighter gray for top border */
-                width: 100%;
-                padding: 10px 0;
-                margin-top: auto; /* Ensures footer stays at the bottom */
+            /* Main container to push footer down */
+            .main-container {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 20px; /* Adjust as needed */
             }
 
-            /* Content container for flex behavior */
-            .content-wrapper {
-                flex: 1; /* Allows this section to grow/shrink as needed */
-                padding: 20px; /* Optional padding for the content */
-                display: block; /* Content should flow normally */
+            /* Footer styling */
+            footer {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                font-size: 16px;
+                border-top: 1px solid #444;
+                width: 100%;
+                padding: 10px 0;
             }
         </style>
         <nav class="navbar">
@@ -80,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="/log-in" class="nav-link">Log In</a></li>
             </ul>
         </nav>
-        <div class="content-wrapper"></div> <!-- Placeholder for page content -->
+        <div class="main-html"></div> <!-- Placeholder for page content -->
     `;
     const footer = `
         <footer>
@@ -88,5 +89,5 @@ document.addEventListener('DOMContentLoaded', () => {
         </footer>
     `;
     document.body.insertAdjacentHTML('afterbegin', nav);
-    document.body.insertAdjacentHTML('beforeend', footer); // Ensure footer is at the end
+    document.body.insertAdjacentHTML('beforeend', footer);
 });
