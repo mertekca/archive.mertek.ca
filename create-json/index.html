@@ -46,15 +46,25 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
 
+        // List of allowed users' email addresses
+        const allowedEmails = ['contact.mertek@gmail.com', 'tamtube741@gmail.com'];
+
         // Check authentication state
         auth.onAuthStateChanged((user) => {
             if (!user) {
                 // Redirect to login page if user is not signed in
                 window.location.href = '/log-in'; // Make sure the path is correct for your login page
             } else {
-                // Show content if user is signed in
-                document.getElementById('content').style.display = 'block';
-                console.log('User is signed in:', user.displayName);
+                // Check if the signed-in user is allowed
+                if (allowedEmails.includes(user.email)) {
+                    // Show content for allowed users
+                    document.getElementById('content').style.display = 'block';
+                    console.log('User is signed in and allowed:', user.displayName);
+                } else {
+                    // Redirect to home or an unauthorized access page
+                    alert('You are not authorized to view this page.');
+                    window.location.href = '/not-permitted';
+                }
             }
         });
     </script>
