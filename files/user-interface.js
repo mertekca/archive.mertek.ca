@@ -2,12 +2,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add Navbar HTML
     const nav = `
         <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            body {
+                padding-top: 60px; /* Prevents navbar overlap */
+            }
+
             .navbar {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
-                height: 60px; /* Navbar height */
+                height: 60px;
                 background-color: #333;
                 color: white;
                 z-index: 1000;
@@ -40,12 +53,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 color: #00aaff;
             }
 
-            /* Add padding to prevent overlap */
-            body {
-                margin: 0;
-                padding-top: 60px;
-                padding-bottom: 30px;
-                box-sizing: border-box;
+            /* Content wrapper to push footer down */
+            .content-wrapper {
+                flex: 1;
+                padding: 20px; /* Adjust as needed */
+            }
+
+            /* Footer Styling */
+            footer {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                font-size: 16px;
+                border-top: 1px solid #444;
+                width: 100%;
+                padding: 10px 0;
             }
         </style>
         <nav class="navbar">
@@ -57,26 +79,24 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
         </nav>
     `;
-    document.body.insertAdjacentHTML('afterbegin', nav);
 
-    // Add Footer HTML
     const footer = `
-        <style>
-            footer {
-                background-color: #333;
-                color: #fff;
-                text-align: center;
-                font-size: 16px;
-                border-top: 1px solid #444;
-                width: 100%;
-                padding: 10px 0;
-                position: relative;
-                bottom: 0;
-            }
-        </style>
         <footer>
             <p>&copy; MerTek Archive Site 2025</p>
         </footer>
     `;
-    document.body.insertAdjacentHTML('beforeend', footer);
+
+    // Insert navbar at the top
+    document.body.insertAdjacentHTML('afterbegin', nav);
+
+    // Wrap all existing content inside a div to push the footer down
+    const contentWrapper = document.createElement('div');
+    contentWrapper.classList.add('content-wrapper');
+
+    while (document.body.childNodes.length > 1) {
+        contentWrapper.appendChild(document.body.childNodes[1]); // Move everything except navbar
+    }
+
+    document.body.appendChild(contentWrapper); // Add wrapper to the body
+    document.body.insertAdjacentHTML('beforeend', footer); // Insert footer at the bottom
 });
