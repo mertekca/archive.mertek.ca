@@ -50,7 +50,7 @@
         auth.onAuthStateChanged((user) => {
             if (!user) {
                 // Redirect to login page if user is not signed in
-                window.location.href = '/login.html'; // Make sure the path is correct for your login page
+                window.location.href = '/log-in'; // Make sure the path is correct for your login page
             } else {
                 // Show content if user is signed in
                 document.getElementById('content').style.display = 'block';
