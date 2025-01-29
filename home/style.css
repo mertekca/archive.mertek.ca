@@ -54,8 +54,8 @@ input[type="text"] {
 .file-item {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
     background-color: #fff;
     padding: 15px;
     margin: 10px;
@@ -66,8 +66,8 @@ input[type="text"] {
     color: #000;
     font-weight: bold;
     width: 200px;
-    height: 80px; /* Fixed height to maintain uniformity */
-    overflow: hidden; /* Prevents content from overflowing */
+    height: 80px; /* Fixed height */
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -82,7 +82,6 @@ input[type="text"] {
 
 .file-item div {
     font-size: 16px;
-    margin-bottom: 5px;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
