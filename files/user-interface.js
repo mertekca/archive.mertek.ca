@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 box-sizing: border-box;
             }
 
-            /* Ensure body takes full height */
+            /* Full Height Layout */
             html, body {
                 height: 100%;
                 display: flex;
@@ -54,10 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 color: #00aaff;
             }
 
-            /* Body Padding to Prevent Overlap */
+            /* Prevent Navbar Overlap */
             body {
                 padding-top: 60px;
-                flex: 1; /* Pushes footer to the bottom */
+                flex: 1;
+                display: flex;
+                flex-direction: column;
             }
 
             /* Content Wrapper */
@@ -66,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 width: 100%;
                 margin: 0 auto;
                 padding: 20px;
-                flex: 1; /* Allows content to expand */
+                flex: 1;
             }
 
             /* Footer Styling */
@@ -77,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 font-size: 16px;
                 border-top: 1px solid #444;
                 width: 100%;
-                padding: 10px 0;
-                position: relative;
+                padding: 20px 0;
+                margin-top: auto; /* Ensures footer stays at the bottom */
             }
         </style>
     `;
