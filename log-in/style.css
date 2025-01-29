@@ -44,25 +44,23 @@ h1 {
     background-color: #2a56c6;
 }
 
-/* Profile Section */
+/* Profile Display */
 #profile {
     display: none;
     margin-top: 20px;
 }
 
-#profile img {
-    border-radius: 50%;
+/* Profile Picture */
+#profile-picture {
     width: 100px;
     height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
 }
 
-#profile p {
-    font-size: 18px;
-    margin-top: 10px;
-}
-
+/* Sign-Out Button */
 #sign-out {
-    background-color: #f44336;
+    background-color: #e74c3c;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -74,11 +72,16 @@ h1 {
 }
 
 #sign-out:hover {
-    background-color: #d32f2f;
+    background-color: #c0392b;
 }
 
 #sign-out:active {
-    background-color: #c62828;
+    background-color: #a93226;
+}
+
+/* Add margin between welcome text and sign-out button */
+#user-name {
+    margin-bottom: 20px;
 }
 
 /* Responsive layout */
@@ -90,10 +93,5 @@ h1 {
     #google-sign-in {
         width: 100%;
         padding: 12px;
-    }
-
-    #profile img {
-        width: 80px;
-        height: 80px;
     }
 }
