@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const styles = `
         <style>
-            /* General Reset */
+            /* Reset */
             * {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
             }
 
-            /* Full Height Layout */
+            /* Make body take full height */
             html, body {
                 height: 100%;
                 display: flex;
@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
             /* Prevent Navbar Overlap */
             body {
                 padding-top: 60px;
-                flex: 1;
                 display: flex;
                 flex-direction: column;
             }
@@ -68,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 width: 100%;
                 margin: 0 auto;
                 padding: 20px;
-                flex: 1;
+                flex: 1; /* Pushes footer down */
             }
 
             /* Footer Styling */
@@ -80,11 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 border-top: 1px solid #444;
                 width: 100%;
                 padding: 20px 0;
-                position: fixed; /* Keep it at the bottom */
-                bottom: 0;
-                left: 0;
-                right: 0;
-                flex-shrink: 0; /* Prevent resizing */
+                margin-top: auto; /* Ensures it stays at the bottom */
             }
         </style>
     `;
