@@ -17,6 +17,16 @@ body {
     text-align: center;
 }
 
+/* Login box container */
+#login-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 /* Page title */
 h1 {
     color: #333;
@@ -34,6 +44,7 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 100%;
 }
 
 #google-sign-in:hover {
@@ -44,13 +55,80 @@ h1 {
     background-color: #2a56c6;
 }
 
+/* User Info Section */
+#user-info {
+    margin-top: 20px;
+}
+
+#user-info img {
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#user-info h2 {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Username Form */
+#username-form {
+    margin-top: 20px;
+}
+
+#username-form input {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#username-form button {
+    padding: 10px;
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#username-form button:hover {
+    background-color: #45a049;
+}
+
+/* Sign-Out Button */
+#google-sign-out {
+    margin-top: 20px;
+    background-color: #DB4437;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#google-sign-out:hover {
+    background-color: #c1351d;
+}
+
+#google-sign-out:active {
+    background-color: #9c2f0c;
+}
+
 /* Responsive layout */
 @media (max-width: 600px) {
     body {
         padding: 20px;
     }
 
-    #google-sign-in {
+    #google-sign-in,
+    #google-sign-out,
+    #submit-username {
         width: 100%;
         padding: 12px;
     }
