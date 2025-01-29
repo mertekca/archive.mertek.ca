@@ -3,33 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In</title>
+    <title>Login</title>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="/files/ui.js"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-    <h1>Log In to Your Account</h1>
-
     <!-- Google Sign-In Button -->
-    <div id="g_id_onload"
-         data-client_id="885621205863-u4j1f2m1pm5uqlq78kdd876530mrnp13.apps.googleusercontent.com"
-         data-login_uri="https://archive.mertek.ca/authenticate"
-         data-auto_prompt="false">
-    </div>
-    <div class="g_id_signin"
-         data-type="standard"
-         data-size="large"
-         data-theme="outline"
-         data-text="sign_in_with"
-         data-shape="rectangular"
-         data-logo_alignment="left">
-    </div>
+    <button id="google-sign-in">Sign in with Google</button>
 
     <script>
-        // Optional: Custom JavaScript for additional functionality
-        console.log('Google Sign-In loaded on the login page.');
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBc2p_OYkuo1IYw4xc-0NYn0M5VtMf-iVI",
+  authDomain: "mertek-archive-site-login.firebaseapp.com",
+  projectId: "mertek-archive-site-login",
+  storageBucket: "mertek-archive-site-login.firebasestorage.app",
+  messagingSenderId: "194382051161",
+  appId: "1:194382051161:web:21e9ea763a0d59bd33be48",
+  measurementId: "G-FTYTP99H96"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        const googleSignInButton = document.getElementById('google-sign-in');
+
+        googleSignInButton.addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then((result) => {
+                    const user = result.user;
+                    console.log('Signed in as:', user.displayName);
+                    // Handle user data, redirect, or update UI
+                })
+                .catch((error) => {
+                    console.error(error.message);
+                });
+        });
     </script>
 </body>
 </html>
