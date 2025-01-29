@@ -1,20 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Add Navbar HTML
-    const nav = `
+    const styles = `
         <style>
-            html, body {
+            /* General Reset */
+            * {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
+            }
+
+            /* Ensure body takes full height */
+            html, body {
                 height: 100%;
                 display: flex;
                 flex-direction: column;
             }
 
-            body {
-                padding-top: 60px; /* Prevents navbar overlap */
-            }
-
+            /* Navbar Styling */
             .navbar {
                 position: fixed;
                 top: 0;
@@ -53,10 +54,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 color: #00aaff;
             }
 
-            /* Content wrapper to push footer down */
+            /* Body Padding to Prevent Overlap */
+            body {
+                padding-top: 60px;
+                flex: 1; /* Pushes footer to the bottom */
+            }
+
+            /* Content Wrapper */
             .content-wrapper {
-                flex: 1;
-                padding: 20px; /* Adjust as needed */
+                max-width: 1200px;
+                width: 100%;
+                margin: 0 auto;
+                padding: 20px;
+                flex: 1; /* Allows content to expand */
             }
 
             /* Footer Styling */
@@ -68,8 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 border-top: 1px solid #444;
                 width: 100%;
                 padding: 10px 0;
+                position: relative;
             }
         </style>
+    `;
+
+    // Navbar HTML
+    const nav = `
         <nav class="navbar">
             <ul class="nav-list">
                 <li><a href="/home" class="nav-link">Home</a></li>
@@ -80,23 +95,29 @@ document.addEventListener('DOMContentLoaded', () => {
         </nav>
     `;
 
+    // Footer HTML
     const footer = `
         <footer>
             <p>&copy; MerTek Archive Site 2025</p>
         </footer>
     `;
 
-    // Insert navbar at the top
+    // Inject styles
+    document.head.insertAdjacentHTML('beforeend', styles);
+
+    // Inject navbar at the top
     document.body.insertAdjacentHTML('afterbegin', nav);
 
-    // Wrap all existing content inside a div to push the footer down
+    // Wrap existing content in a content wrapper
     const contentWrapper = document.createElement('div');
     contentWrapper.classList.add('content-wrapper');
 
     while (document.body.childNodes.length > 1) {
-        contentWrapper.appendChild(document.body.childNodes[1]); // Move everything except navbar
+        contentWrapper.appendChild(document.body.childNodes[1]);
     }
+    
+    document.body.appendChild(contentWrapper);
 
-    document.body.appendChild(contentWrapper); // Add wrapper to the body
-    document.body.insertAdjacentHTML('beforeend', footer); // Insert footer at the bottom
+    // Inject footer at the bottom
+    document.body.insertAdjacentHTML('beforeend', footer);
 });
