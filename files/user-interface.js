@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 max-width: 1200px;
                 width: 100%;
                 margin: 0 auto;
-                padding: 20px;
+                padding: 40px 20px; /* Increased padding */
                 flex: 1; /* Pushes footer down */
             }
 
@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 font-size: 16px;
                 border-top: 1px solid #444;
                 width: 100%;
-                padding: 20px 0;
-                margin-top: auto; /* Ensures it stays at the bottom */
+                padding: 30px 0; /* Increased padding */
+                margin-top: 40px; /* Extra space between content and footer */
             }
         </style>
     `;
