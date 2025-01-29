@@ -7,13 +7,31 @@
     <!-- Firebase SDK (Older, Namespaced Version) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script src="/files/user-interface.js"></script>
 </head>
 <body>
-    <!-- Google Sign-In Button -->
-    <button id="google-sign-in">Sign in with Google</button>
+    <!-- Login Box -->
+    <div id="login-box">
+        <!-- Google Sign-In Button -->
+        <button id="google-sign-in">Sign in with Google</button>
+        <!-- Logout Button -->
+        <button id="google-sign-out" style="display: none;">Sign out</button>
+
+        <!-- User Info Display -->
+        <div id="user-info" style="display: none;">
+            <img id="user-photo" width="80" height="80" alt="User Photo">
+            <h2>Welcome, <span id="user-name"></span></h2>
+        </div>
+
+        <!-- Username Form (visible when signing in for the first time) -->
+        <div id="username-form" style="display: none;">
+            <label for="username">Pick a username:</label>
+            <input type="text" id="username" placeholder="Enter a unique username">
+            <button id="submit-username">Submit</button>
+        </div>
+    </div>
 
     <script>
         // Your Firebase configuration
@@ -30,22 +48,91 @@
         // Initialize Firebase (Older SDK style)
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
+        const db = firebase.firestore();
 
-        // Handle Google Sign-In
         const googleSignInButton = document.getElementById('google-sign-in');
+        const googleSignOutButton = document.getElementById('google-sign-out');
+        const userInfoDiv = document.getElementById('user-info');
+        const userNameDisplay = document.getElementById('user-name');
+        const userPhoto = document.getElementById('user-photo');
+        const usernameForm = document.getElementById('username-form');
+        const submitUsernameButton = document.getElementById('submit-username');
+        const usernameInput = document.getElementById('username');
 
+        // Google Sign-In Functionality
         googleSignInButton.addEventListener('click', () => {
             const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .then((result) => {
-                    const user = result.user;
-                    console.log('Signed in as:', user.displayName);
-                    // Handle user data (e.g., display the user's name)
-                })
-                .catch((error) => {
-                    console.error("Error during Google sign-in:", error.message);
-                    alert("Error: " + error.message);
+            auth.signInWithPopup(provider).then((result) => {
+                const user = result.user;
+
+                // Check if the user is signing in for the first time
+                db.collection('users').doc(user.uid).get().then((doc) => {
+                    if (!doc.exists) {
+                        // First time user, prompt them to set a username
+                        usernameForm.style.display = 'block';
+                    } else {
+                        // Existing user, display their info
+                        displayUserInfo(user);
+                    }
                 });
+            }).catch((error) => {
+                console.error("Error during Google sign-in:", error.message);
+                alert("Error: " + error.message);
+            });
+        });
+
+        // Submit the unique username when the user is signing in for the first time
+        submitUsernameButton.addEventListener('click', () => {
+            const user = auth.currentUser;
+            const username = usernameInput.value.trim();
+
+            if (username) {
+                // Store the username in Firestore
+                db.collection('users').doc(user.uid).set({
+                    name: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL,
+                    username: username
+                }).then(() => {
+                    usernameForm.style.display = 'none'; // Hide the username form
+                    displayUserInfo(user); // Display user info
+                }).catch((error) => {
+                    console.error("Error saving username:", error.message);
+                });
+            }
+        });
+
+        // Display user information (name, photo)
+        function displayUserInfo(user) {
+            userNameDisplay.textContent = user.displayName;
+            userPhoto.src = user.photoURL;
+            userInfoDiv.style.display = 'block';
+            googleSignInButton.style.display = 'none';
+            googleSignOutButton.style.display = 'inline-block';
+        }
+
+        // Sign out functionality
+        googleSignOutButton.addEventListener('click', () => {
+            auth.signOut().then(() => {
+                userInfoDiv.style.display = 'none';
+                googleSignInButton.style.display = 'inline-block';
+                googleSignOutButton.style.display = 'none';
+                usernameForm.style.display = 'none'; // Hide the username form if it's visible
+            }).catch((error) => {
+                console.error("Error signing out:", error.message);
+            });
+        });
+
+        // Monitor authentication state changes (to persist login state across page reloads)
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // Check if user is new or existing
+                db.collection('users').doc(user.uid).get().then((doc) => {
+                    if (doc.exists) {
+                        displayUserInfo(user); // Show user info if they are an existing user
+                    }
+                });
+            }
         });
     </script>
 </body>
