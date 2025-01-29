@@ -11,15 +11,19 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    align-items: center; /* Keeps content centered while allowing text alignment adjustments */
 }
 
-/* The content wrapper takes all the remaining space */
+/* Main content wrapper */
 .content-wrapper {
     flex: 1;
-    padding: 20px;
-    text-align: center;
+    width: 90%; /* Ensures it doesn't span the full width */
     max-width: 800px;
-    margin: 0 auto;
+    padding: 30px;
+    text-align: left; /* Aligns text to the left */
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 /* Heading styling */
@@ -27,13 +31,32 @@ h1 {
     font-size: 36px;
     margin-bottom: 20px;
     color: #333;
+    text-align: center; /* Keeps main titles centered */
+}
+
+h2 {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #222;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* Paragraph and text styling */
+p, ul {
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: left;
+    margin-left: 10px; /* Adds subtle spacing from the left */
+    margin-right: 10px; /* Keeps text balanced */
 }
 
 /* Links styling */
 a {
     color: #007bff;
     text-decoration: none;
-    font-size: 18px;
+    font-weight: 600;
 }
 
 a:hover {
@@ -65,6 +88,7 @@ a:hover {
     border-radius: 5px;
     text-align: left;
     background-color: #fff;
+    transition: background 0.3s ease;
 }
 
 .file-item:hover {
@@ -77,12 +101,25 @@ a:hover {
     font-size: 18px;
 }
 
-/* Terms and Privacy Content */
+/* Legal Pages (Terms and Privacy) */
 .terms-content, .privacy-content {
     text-align: left;
     margin: 20px auto;
-    line-height: 1.6;
+    width: 90%;
     max-width: 800px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Bullet point spacing */
+.terms-content ul, .privacy-content ul {
+    padding-left: 20px;
+}
+
+.terms-content li, .privacy-content li {
+    margin-bottom: 10px;
 }
 
 /* Button styling */
@@ -94,6 +131,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: background 0.3s ease;
 }
 
 button:hover {
