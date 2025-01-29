@@ -43,7 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
             /* Add padding to prevent overlap */
             body {
                 margin: 0;
-                padding-top: 60px; /* Matches navbar height */
+                padding-top: 60px;
+                padding-bottom: 30px;
                 box-sizing: border-box;
             }
         </style>
@@ -69,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 border-top: 1px solid #444;
                 width: 100%;
                 padding: 10px 0;
-                padding-top: 20px;
                 position: relative;
                 bottom: 0;
             }
