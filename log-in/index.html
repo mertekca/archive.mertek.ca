@@ -12,7 +12,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>Firebase Login</h1>
+    <h1>Google Login</h1>
     
     <!-- Google Sign-In Button -->
     <button id="google-sign-in">Sign in with Google</button>
@@ -78,7 +78,7 @@
             // Set user profile details
             document.getElementById('profile-picture').src = user.photoURL;
             document.getElementById('user-name').innerText = `Welcome, ${user.displayName}`;
-            
+            <br>
             // Check if it's the first time the user is signing in
             const userRef = firestore.collection('users').doc(user.uid);
             userRef.get().then(doc => {
