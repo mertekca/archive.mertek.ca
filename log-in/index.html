@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <!-- Firebase SDK (Older, Namespaced Version) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="/files/user-interface.js"></script>
@@ -18,17 +18,17 @@
     <script>
         // Your Firebase configuration
         const firebaseConfig = {
-          apiKey: "AIzaSyBc2p_OYkuo1IYw4xc-0NYn0M5VtMf-iVI",
-          authDomain: "mertek-archive-site-login.firebaseapp.com",
-          projectId: "mertek-archive-site-login",
-          storageBucket: "mertek-archive-site-login.firebasestorage.app",
-          messagingSenderId: "194382051161",
-          appId: "1:194382051161:web:21e9ea763a0d59bd33be48",
-          measurementId: "G-FTYTP99H96"
+            apiKey: "AIzaSyBc2p_OYkuo1IYw4xc-0NYn0M5VtMf-iVI",
+            authDomain: "mertek-archive-site-login.firebaseapp.com",
+            projectId: "mertek-archive-site-login",
+            storageBucket: "mertek-archive-site-login.firebasestorage.app",
+            messagingSenderId: "194382051161",
+            appId: "1:194382051161:web:21e9ea763a0d59bd33be48",
+            measurementId: "G-FTYTP99H96"
         };
 
-        // Initialize Firebase (using the older, namespaced method)
-        const app = firebase.initializeApp(firebaseConfig);
+        // Initialize Firebase (Older SDK style)
+        firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
 
         // Handle Google Sign-In
