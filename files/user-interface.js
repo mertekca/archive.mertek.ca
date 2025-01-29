@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 border-top: 1px solid #444;
                 width: 100%;
                 padding: 10px 0;
+                padding-top: 20px;
                 position: relative;
                 bottom: 0;
             }
