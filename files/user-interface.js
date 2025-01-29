@@ -1,13 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Add Navbar HTML
-    const nav = 
+    const styles = `
         <style>
+            /* General Reset */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            /* Full Height Layout */
+            html, body {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* Navbar Styling */
             .navbar {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
-                height: 60px; /* Navbar height */
+                height: 60px;
                 background-color: #333;
                 color: white;
                 z-index: 1000;
@@ -40,13 +54,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 color: #00aaff;
             }
 
-            /* Add padding to prevent overlap */
+            /* Prevent Navbar Overlap */
             body {
-                margin: 0;
                 padding-top: 60px;
-                box-sizing: border-box;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* Content Wrapper */
+            .content-wrapper {
+                max-width: 1200px;
+                width: 100%;
+                margin: 0 auto;
+                padding: 20px;
+                flex: 1;
+            }
+
+            /* Footer Styling */
+            footer {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                font-size: 16px;
+                border-top: 1px solid #444;
+                width: 100%;
+                padding: 20px 0;
+                position: fixed; /* Keep it at the bottom */
+                bottom: 0;
+                left: 0;
+                right: 0;
+                flex-shrink: 0; /* Prevent resizing */
             }
         </style>
+    `;
+
+    // Navbar HTML
+    const nav = `
         <nav class="navbar">
             <ul class="nav-list">
                 <li><a href="/home" class="nav-link">Home</a></li>
@@ -55,27 +99,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="/log-in" class="nav-link">Log In</a></li>
             </ul>
         </nav>
-    ;
-    document.body.insertAdjacentHTML('afterbegin', nav);
+    `;
 
-    // Add Footer HTML
-    const footer = 
-        <style>
-            footer {
-                background-color: #333;
-                color: #fff;
-                text-align: center;
-                font-size: 16px;
-                border-top: 1px solid #444;
-                width: 100%;
-                padding: 10px 0;
-                position: relative;
-                bottom: 0;
-            }
-        </style>
+    // Footer HTML
+    const footer = `
         <footer>
             <p>&copy; MerTek Archive Site 2025</p>
         </footer>
-    ;
+    `;
+
+    // Inject styles
+    document.head.insertAdjacentHTML('beforeend', styles);
+
+    // Inject navbar at the top
+    document.body.insertAdjacentHTML('afterbegin', nav);
+
+    // Wrap existing content in a content wrapper
+    const contentWrapper = document.createElement('div');
+    contentWrapper.classList.add('content-wrapper');
+
+    while (document.body.childNodes.length > 1) {
+        contentWrapper.appendChild(document.body.childNodes[1]);
+    }
+    
+    document.body.appendChild(contentWrapper);
+
+    // Inject footer at the bottom
     document.body.insertAdjacentHTML('beforeend', footer);
 });
