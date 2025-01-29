@@ -52,7 +52,10 @@ input[type="text"] {
 
 /* File item card styling */
 .file-item {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     background-color: #fff;
     padding: 15px;
     margin: 10px;
@@ -60,9 +63,13 @@ input[type="text"] {
     border: 1px solid #ccc;
     text-align: center;
     text-decoration: none;
-    color: #000; /* Black text */
+    color: #000;
     font-weight: bold;
-    width: 200px; /* Fixed size for consistency */
+    width: 200px;
+    height: 80px; /* Fixed height to maintain uniformity */
+    overflow: hidden; /* Prevents content from overflowing */
+    text-overflow: ellipsis;
+    white-space: nowrap;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
 }
@@ -76,9 +83,17 @@ input[type="text"] {
 .file-item div {
     font-size: 16px;
     margin-bottom: 5px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .file-item small {
     color: #666;
     font-size: 14px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
