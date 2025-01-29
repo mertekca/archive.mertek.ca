@@ -68,8 +68,6 @@ input[type="text"] {
     width: 200px;
     height: 80px; /* Fixed height */
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
 }
@@ -80,19 +78,18 @@ input[type="text"] {
     background-color: #f9f9f9;
 }
 
-.file-item div {
+.file-item div,
+.file-item small {
     font-size: 16px;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    margin-bottom: 5px;
+    width: 100%; /* Make sure text can wrap */
+    word-wrap: break-word; /* Ensure text wraps within the box */
+    word-break: break-word; /* Force wrapping for long words */
+    white-space: normal; /* Allow text to break onto new lines */
+    text-align: center; /* Center text within the file-item */
 }
 
 .file-item small {
     color: #666;
     font-size: 14px;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
