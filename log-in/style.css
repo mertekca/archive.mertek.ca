@@ -1,53 +1,57 @@
-/* General body styling */
-body {
-    font-family: Arial, sans-serif;
+/* Basic reset */
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    color: #333;
-}
-
-/* Center the content wrapper */
-.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
     text-align: center;
-    padding: 20px;
-    max-width: 400px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 90%;
 }
 
-/* Headings styling */
+/* Page title */
 h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
     color: #333;
+    margin-bottom: 20px;
 }
 
-/* Google Sign-In Button Container */
-.g_id_signin {
-    margin: 20px 0;
+/* Google Sign-In Button Styling */
+#google-sign-in {
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Footer styling */
-footer {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #666;
+#google-sign-in:hover {
+    background-color: #357ae8;
 }
 
-footer a {
-    color: #007bff;
-    text-decoration: none;
+#google-sign-in:active {
+    background-color: #2a56c6;
 }
 
-footer a:hover {
-    text-decoration: underline;
-    color: #0056b3;
+/* Responsive layout */
+@media (max-width: 600px) {
+    body {
+        padding: 20px;
+    }
+
+    #google-sign-in {
+        width: 100%;
+        padding: 12px;
+    }
 }
