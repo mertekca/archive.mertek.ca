@@ -80,11 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 border-top: 1px solid #444;
                 width: 100%;
                 padding: 20px 0;
-                position: fixed; /* Keep it at the bottom */
-                bottom: 0;
-                left: 0;
-                right: 0;
-                flex-shrink: 0; /* Prevent resizing */
+                margin-top: auto; /* Ensures footer stays at the bottom */
             }
         </style>
     `;
