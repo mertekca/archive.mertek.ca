@@ -8,7 +8,7 @@ html, body {
 }
 
 /* Flexbox layout for the entire body */
-body {
+body *:not(footer) {
     display: flex;
     flex-direction: column;
     align-items: center; /* Keeps content centered while allowing text alignment adjustments */
