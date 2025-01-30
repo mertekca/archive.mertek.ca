@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="/files/user-interface.js"></script>
 </head>
 <body>
@@ -22,6 +23,14 @@
             <input type="file" id="upload-json" accept=".json" style="display:none;">
             <button id="upload-btn">Upload JSON</button>
         </label>
+    </div>
+
+    <!-- File Management -->
+    <div id="file-management" style="display: none;">
+        <h3>Saved Filesets</h3>
+        <input type="text" id="file-set-name" placeholder="Enter file set name" />
+        <button id="save-file-set">Save File Set</button>
+        <div id="saved-file-sets"></div>
     </div>
 
     <div id="entries-container"></div>
@@ -45,6 +54,7 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
+        const firestore = firebase.firestore();
 
         // List of allowed users' email addresses
         const allowedEmails = ['contact.mertek@gmail.com', 'tamtube741@gmail.com'];
@@ -60,7 +70,9 @@
                 if (allowedEmails.includes(user.email)) {
                     // Show content for allowed users
                     document.getElementById('content').style.display = 'block';
+                    document.getElementById('file-management').style.display = 'block'; // Show file management
                     console.log('User is signed in and allowed:', user.displayName);
+                    loadSavedFiles(user.uid); // Load saved filesets when authorized
                 } else {
                     // Redirect to home or an unauthorized access page
                     alert('You are not authorized to view this page.');
@@ -68,6 +80,78 @@
                 }
             }
         });
+
+        // Load saved file sets from Firestore
+        function loadSavedFiles(userId) {
+            const userRef = firestore.collection('users').doc(userId);
+            userRef.collection('filesets').get().then((querySnapshot) => {
+                const savedSetsList = document.getElementById('saved-file-sets');
+                savedSetsList.innerHTML = ''; // Clear previous saved sets
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const div = document.createElement('div');
+                    div.classList.add('file-set-item');
+                    div.innerHTML = `
+                        <span>${data.name}</span>
+                        <button class="load-btn" onclick="loadFileSet('${doc.id}')">Load</button>
+                        <button class="delete-btn" onclick="deleteFileSet('${doc.id}', '${data.name}')">X</button>
+                    `;
+                    savedSetsList.appendChild(div);
+                });
+            });
+        }
+
+        // Save File Set
+        document.getElementById('save-file-set').addEventListener('click', () => {
+            const fileSetName = document.getElementById('file-set-name').value;
+            if (!fileSetName) {
+                alert('Please enter a name for the file set');
+                return;
+            }
+
+            const user = auth.currentUser;
+            const userRef = firestore.collection('users').doc(user.uid);
+            userRef.collection('filesets').add({
+                name: fileSetName,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                console.log('File set saved');
+                loadSavedFiles(user.uid); // Reload the list after saving
+                document.getElementById('file-set-name').value = ''; // Clear the input field
+            }).catch((error) => {
+                console.error("Error saving file set:", error.message);
+            });
+        });
+
+        // Load File Set
+        function loadFileSet(fileSetId) {
+            const user = auth.currentUser;
+            const userRef = firestore.collection('users').doc(user.uid);
+            userRef.collection('filesets').doc(fileSetId).get().then((doc) => {
+                if (doc.exists) {
+                    const fileSet = doc.data();
+                    console.log('Loaded file set:', fileSet);
+                    // Populate the JSON entries with the loaded data (example logic)
+                    document.getElementById('entries-container').innerHTML = fileSet.name; // Replace with actual data
+                }
+            }).catch((error) => {
+                console.error("Error loading file set:", error.message);
+            });
+        }
+
+        // Delete File Set with Confirmation
+        function deleteFileSet(fileSetId, fileSetName) {
+            if (confirm(`Are you sure you want to delete the file set "${fileSetName}"? This action cannot be undone.`)) {
+                const user = auth.currentUser;
+                const userRef = firestore.collection('users').doc(user.uid);
+                userRef.collection('filesets').doc(fileSetId).delete().then(() => {
+                    console.log('File set deleted');
+                    loadSavedFiles(user.uid); // Reload the list after deletion
+                }).catch((error) => {
+                    console.error("Error deleting file set:", error.message);
+                });
+            }
+        }
     </script>
     
     <script src="create-json.js"></script>
