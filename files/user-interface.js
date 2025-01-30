@@ -81,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 width: 100%;
                 padding: 20px 0;
                 margin-top: auto; /* Ensures footer stays at the bottom */
-                padding-top: 10px;
             }
         </style>
     `;
