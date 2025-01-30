@@ -66,23 +66,23 @@ saveUsernameButton.addEventListener('click', () => {
 });
 
 // Trigger File Picker on Upload Button Click
-uploadPictureButton.addEventListener('click', () => {
-    PictureInput.click(); // Opens the file selection dialog
+uploadProfilePictureButton.addEventListener('click', () => {
+    profilePictureInput.click(); // Opens the file selection dialog
 });
 
-// Upload  Picture when a File is Selected
-PictureInput.addEventListener('change', () => {
+// Upload Profile Picture when a File is Selected
+profilePictureInput.addEventListener('change', () => {
     const user = auth.currentUser;
-    const file = PictureInput.files[0];
+    const file = profilePictureInput.files[0];
     if (user && file) {
-        const storageRef = storage.ref('_pictures/' + user.uid);
+        const storageRef = storage.ref('profile_pictures/' + user.uid);
         
         storageRef.put(file).then(snapshot => {
             snapshot.ref.getDownloadURL().then(downloadURL => {
                 database.ref('users/' + user.uid).update({ photoURL: downloadURL })
                     .then(() => {
-                        Picture.src = downloadURL; // Update UI instantly
-                        console.log(" picture updated successfully!");
+                        profilePicture.src = downloadURL; // Update UI instantly
+                        console.log("Profile picture updated successfully!");
                     })
                     .catch(error => console.error("Database Update Error:", error.message));
             });
@@ -93,7 +93,7 @@ PictureInput.addEventListener('change', () => {
 // Sign Out
 signOutButton.addEventListener('click', () => {
     auth.signOut().then(() => {
-        Section.style.display = 'none';
+        profileSection.style.display = 'none';
         googleSignInButton.style.display = 'inline-block';
         emailPasswordLogin.style.display = 'block';
     });
@@ -103,7 +103,7 @@ signOutButton.addEventListener('click', () => {
 function handleUserSignIn(user) {
     googleSignInButton.style.display = 'none';
     emailPasswordLogin.style.display = 'none';
-    Section.style.display = 'block';
+    profileSection.style.display = 'block';
 
     const userRef = database.ref('users/' + user.uid);
     userRef.once('value').then(snapshot => {
@@ -112,7 +112,7 @@ function handleUserSignIn(user) {
         } else {
             const userData = snapshot.val();
             userNameElement.innerText = `Welcome, ${userData.username}`;
-            Picture.src = userData.photoURL || 'default-.png';
+            profilePicture.src = userData.photoURL || 'default-profile.png';
         }
     });
 }
