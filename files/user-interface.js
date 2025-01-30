@@ -1,86 +1,77 @@
 document.addEventListener('DOMContentLoaded', () => {
     const styles = `
-        <style>
+        <style id="custom-styles">
             /* General Reset */
             * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
+                all: unset; /* Resets external styles */
+                box-sizing: border-box !important;
             }
 
             /* Full Height Layout */
             html, body {
-                height: 100%;
-                display: flex;
-                flex-direction: column;
+                height: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                font-family: Arial, sans-serif !important;
+                background-color: white !important;
+                color: black !important;
             }
 
             /* Navbar Styling */
             .navbar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 60px;
-                background-color: #333;
-                color: white;
-                z-index: 1000;
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 60px !important;
+                background-color: #333 !important;
+                color: white !important;
+                z-index: 1000 !important;
+                display: flex !important;
+                justify-content: space-around !important;
+                align-items: center !important;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
             }
 
             .nav-list {
-                list-style: none;
-                display: flex;
-                margin: 0;
-                padding: 0;
+                list-style: none !important;
+                display: flex !important;
             }
 
             .nav-list li {
-                margin: 0 15px;
+                margin: 0 15px !important;
             }
 
             .nav-link {
-                color: white;
-                text-decoration: none;
-                font-size: 18px;
-                font-weight: bold;
-                transition: color 0.3s ease;
+                color: white !important;
+                text-decoration: none !important;
+                font-size: 18px !important;
+                font-weight: bold !important;
+                transition: color 0.3s ease !important;
             }
 
             .nav-link:hover {
-                color: #00aaff;
+                color: #00aaff !important;
             }
 
             /* Prevent Navbar Overlap */
             body {
-                padding-top: 60px;
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-            }
-
-            /* Content Wrapper */
-            .content-wrapper {
-                max-width: 1200px;
-                width: 100%;
-                margin: 0 auto;
-                padding: 20px;
-                flex: 1;
+                padding-top: 60px !important;
+                flex: 1 !important;
+                display: flex !important;
+                flex-direction: column !important;
             }
 
             /* Footer Styling */
             footer {
-                background-color: #333;
-                color: #fff;
-                text-align: center;
-                font-size: 16px;
-                border-top: 1px solid #444;
-                width: 100%;
-                padding: 20px 0;
-                margin-top: auto; /* Ensures footer stays at the bottom */
+                background-color: #333 !important;
+                color: #fff !important;
+                text-align: center !important;
+                font-size: 16px !important;
+                border-top: 1px solid #444 !important;
+                width: 100% !important;
+                padding: 20px 0 !important;
+                margin-top: auto !important; /* Ensures footer stays at the bottom */
             }
         </style>
     `;
@@ -104,21 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
         </footer>
     `;
 
-    // Inject styles
+    // Inject styles (ignore external styles)
     document.head.insertAdjacentHTML('beforeend', styles);
 
     // Inject navbar at the top
     document.body.insertAdjacentHTML('afterbegin', nav);
-
-    // Wrap existing content in a content wrapper
-    const contentWrapper = document.createElement('div');
-    contentWrapper.classList.add('content-wrapper');
-
-    while (document.body.childNodes.length > 1) {
-        contentWrapper.appendChild(document.body.childNodes[1]);
-    }
-    
-    document.body.appendChild(contentWrapper);
 
     // Inject footer at the bottom
     document.body.insertAdjacentHTML('beforeend', footer);
