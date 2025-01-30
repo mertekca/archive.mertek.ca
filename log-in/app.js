@@ -24,7 +24,6 @@ const editUsernameInput = document.getElementById('edit-username');
 const saveUsernameButton = document.getElementById('save-username');
 const userNameElement = document.getElementById('user-name');
 const profilePicture = document.getElementById('profile-picture');
-const profilePictureInput = document.getElementById('profile-picture-input');
 const uploadProfilePictureButton = document.getElementById('upload-profile-picture');
 const loginEmailButton = document.getElementById('login-email');
 const registerEmailButton = document.getElementById('register-email');
@@ -65,29 +64,35 @@ saveUsernameButton.addEventListener('click', () => {
     }
 });
 
-// Trigger File Picker on Upload Button Click
+// Trigger File Picker When Upload Button is Clicked
 uploadProfilePictureButton.addEventListener('click', () => {
-    profilePictureInput.click(); // Opens the file selection dialog
-});
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
 
-// Upload Profile Picture when a File is Selected
-profilePictureInput.addEventListener('change', () => {
-    const user = auth.currentUser;
-    const file = profilePictureInput.files[0];
-    if (user && file) {
-        const storageRef = storage.ref('profile_pictures/' + user.uid);
-        
-        storageRef.put(file).then(snapshot => {
-            snapshot.ref.getDownloadURL().then(downloadURL => {
-                database.ref('users/' + user.uid).update({ photoURL: downloadURL })
-                    .then(() => {
-                        profilePicture.src = downloadURL; // Update UI instantly
-                        console.log("Profile picture updated successfully!");
-                    })
-                    .catch(error => console.error("Database Update Error:", error.message));
-            });
-        });
-    }
+    input.addEventListener('change', async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const user = auth.currentUser;
+        const storageRef = storage.ref(`profile_pictures/${user.uid}`);
+
+        try {
+            const snapshot = await storageRef.put(file);
+            const downloadURL = await snapshot.ref.getDownloadURL();
+            
+            // Update Firebase Database
+            await database.ref('users/' + user.uid).update({ photoURL: downloadURL });
+
+            // Update UI Instantly
+            profilePicture.src = downloadURL;
+            console.log("Profile picture updated successfully!");
+        } catch (error) {
+            console.error("Upload Error:", error.message);
+        }
+    });
+
+    input.click(); // Open file selection dialog
 });
 
 // Sign Out
