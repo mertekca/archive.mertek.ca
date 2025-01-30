@@ -65,16 +65,26 @@ saveUsernameButton.addEventListener('click', () => {
     }
 });
 
-// Upload Profile Picture
+// Trigger File Picker on Upload Button Click
 uploadProfilePictureButton.addEventListener('click', () => {
+    profilePictureInput.click(); // Opens the file selection dialog
+});
+
+// Upload Profile Picture when a File is Selected
+profilePictureInput.addEventListener('change', () => {
     const user = auth.currentUser;
     const file = profilePictureInput.files[0];
     if (user && file) {
         const storageRef = storage.ref('profile_pictures/' + user.uid);
+        
         storageRef.put(file).then(snapshot => {
             snapshot.ref.getDownloadURL().then(downloadURL => {
-                database.ref('users/' + user.uid).update({ photoURL: downloadURL });
-                profilePicture.src = downloadURL;
+                database.ref('users/' + user.uid).update({ photoURL: downloadURL })
+                    .then(() => {
+                        profilePicture.src = downloadURL; // Update UI instantly
+                        console.log("Profile picture updated successfully!");
+                    })
+                    .catch(error => console.error("Database Update Error:", error.message));
             });
         });
     }
