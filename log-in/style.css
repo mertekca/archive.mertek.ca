@@ -44,6 +44,40 @@ h1 {
     background-color: #2a56c6;
 }
 
+/* Email & Password Login Section */
+#email-password-login {
+    margin-top: 20px;
+    display: none;
+}
+
+#email-password-login input {
+    padding: 10px;
+    font-size: 16px;
+    width: 80%;
+    max-width: 300px;
+    margin-bottom: 10px;
+}
+
+#email-password-login button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#email-password-login button:hover {
+    background-color: #2980b9;
+}
+
+#email-password-login button:active {
+    background-color: #21618c;
+}
+
 /* Profile Display */
 #profile {
     display: none;
@@ -56,6 +90,40 @@ h1 {
     height: 100px;
     border-radius: 50%;
     margin-bottom: 20px;
+}
+
+/* User Name */
+#user-name {
+    margin-bottom: 20px;
+}
+
+/* Edit Username Input */
+#edit-username {
+    padding: 10px;
+    font-size: 16px;
+    width: 80%;
+    max-width: 300px;
+    margin-bottom: 10px;
+}
+
+/* Save Username Button */
+#save-username {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#save-username:hover {
+    background-color: #27ae60;
+}
+
+#save-username:active {
+    background-color: #1f7f4f;
 }
 
 /* Sign-Out Button */
@@ -79,11 +147,6 @@ h1 {
     background-color: #a93226;
 }
 
-/* Add margin between welcome text and sign-out button */
-#user-name {
-    margin-bottom: 20px;
-}
-
 /* Responsive layout */
 @media (max-width: 600px) {
     body {
@@ -93,5 +156,9 @@ h1 {
     #google-sign-in {
         width: 100%;
         padding: 12px;
+    }
+
+    #email-password-login input, #edit-username {
+        width: 100%;
     }
 }
