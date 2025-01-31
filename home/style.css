@@ -17,7 +17,8 @@ body {
     flex: 1; /* Ensures the content fills up all available space */
     padding: 20px;
     text-align: center;
-    max-width: 800px; /* Optional: Max width for better readability */
+    max-width: 1200px; /* Increased max width for wider layout */
+    width: 90%; /* Ensures responsiveness */
     margin: 0 auto; /* Centers the content horizontally */
 }
 
@@ -48,8 +49,9 @@ input[type="text"] {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 1200px;
-    width: 90%;
+    max-width: 1200px; /* Increased max width */
+    width: 90%; /* Ensures responsiveness */
+    margin: 20px auto; /* Centering the file list */
 }
 
 /* File item card styling */
@@ -59,7 +61,7 @@ input[type="text"] {
     justify-content: center; /* Center content vertically */
     align-items: center; /* Center content horizontally */
     background-color: #fff;
-    padding: 20px;
+    padding: 15px;
     margin: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -67,7 +69,6 @@ input[type="text"] {
     text-decoration: none;
     color: #000;
     font-weight: bold;
-    font-size: 18px;
     width: 200px;
     height: 90px;
     overflow: hidden;
