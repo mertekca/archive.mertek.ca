@@ -1,4 +1,6 @@
-[
+{
+    "dropdownDisplayName": "Test",
+    "files": [
     {
         "name": "Unknown Journey",
         "url": "/files/unknown-journey/",
@@ -119,4 +121,4 @@
         "tags": ["whispers", "history"],
         "inviTags": ["memory", "historical", "echoes"]
     }
-]
+]}
