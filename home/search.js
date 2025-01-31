@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (query === "") {
             resultCount.style.display = "none"; // Hide result count if no search query
+            noResults.style.display = "none"; // Hide "no results" message
         } else if (filteredFiles.length > 0) {
             noResults.style.display = "none"; // Hide "no results" message
             resultCount.style.display = "block"; // Show the result count
@@ -92,6 +93,11 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             fileList.appendChild(a);
         });
+
+        if (files.length === 0) {
+            const noResults = document.getElementById("noResults");
+            noResults.style.display = "block"; // Show "No files found" if there are no files
+        }
     }
 
     // Dropdown change event
