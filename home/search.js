@@ -47,10 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const fileList = document.getElementById("fileList");
         const noResults = document.getElementById("noResults");
+        const resultCount = document.getElementById("resultCount"); // Element to display result count
         fileList.innerHTML = "";
 
         if (filteredFiles.length > 0) {
             noResults.style.display = "none"; // Hide "no results" message
+            resultCount.style.display = "block"; // Show the result count
+            resultCount.textContent = `${filteredFiles.length} result(s) found`; // Display the number of results
             filteredFiles.forEach((file) => {
                 const a = document.createElement("a");
                 a.href = file.url;
@@ -63,13 +66,16 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         } else {
             noResults.style.display = "block"; // Show "no results" message
+            resultCount.style.display = "none"; // Hide the result count when there are no results
         }
     }
 
     // Display files
     function displayFiles(files) {
         const fileList = document.getElementById("fileList");
+        const resultCount = document.getElementById("resultCount"); // Element to display result count
         fileList.innerHTML = "";
+        resultCount.style.display = "none"; // Hide the result count initially
 
         files.forEach((file) => {
             const a = document.createElement("a");
