@@ -12,6 +12,11 @@ html, body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
+    padding-bottom: 50px; /* Ensures bottom spacing */
+}
+
+/* Flexbox layout for the entire body */
+body *:not(footer) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,12 +27,12 @@ html, body {
     flex: 1;
     width: 90%;
     max-width: 800px;
-    padding: 30px;
+    padding: 50px 30px; /* Ensures equal top and bottom padding */
     text-align: left;
     background: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    margin-top: 20px;
+    margin-top: 50px; /* Matches bottom padding */
 }
 
 /* Heading styling */
@@ -90,6 +95,7 @@ a:hover {
     border: 1px solid #ddd;
     margin-bottom: 10px;
     border-radius: 5px;
+    text-align: left;
     background-color: #fff;
     transition: background 0.3s ease;
 }
@@ -107,11 +113,11 @@ a:hover {
 /* Legal Pages (Terms and Privacy) */
 .terms-content, .privacy-content {
     text-align: left;
-    margin: 20px auto;
+    margin: 50px auto; /* Matches bottom padding */
     width: 90%;
     max-width: 800px;
     background: #fff;
-    padding: 30px;
+    padding: 50px; /* Ensures equal top and bottom padding */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -139,4 +145,16 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    border-top: 1px solid #444;
+    width: 100%;
+    padding: 20px 0;
+    margin-top: auto;
 }
