@@ -11,23 +11,14 @@
 <body>
     <div class="content-wrapper">
         <h1>Search for Files</h1>
-        
+
         <!-- Dropdown to select JSON file -->
         <select id="fileSelector">
-            <option value="json-files/main.json">Main Files</option>
-            <option value="json-files/school.json">School Projects</option>
-            <option value="json-files/test.json">Test File</option>
-            <option value="upload">Upload File</option>
+            <!-- Options will be populated by JavaScript -->
         </select>
 
         <input type="text" id="searchBar" placeholder="Search files..." />
-        
-        <!-- Result Count Display -->
-        <p id="resultCount" style="display: none;"></p>
-        
         <div id="fileList" class="file-list" role="list"></div>
-        
-        <!-- No Results Message -->
         <p id="noResults" class="no-results" style="display:none;">No files found.</p>
 
         <!-- Hidden file input for uploads -->
