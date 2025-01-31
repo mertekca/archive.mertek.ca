@@ -3,23 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const styleElement = document.createElement("style");
     styleElement.id = "custom-styles";
     styleElement.innerHTML = `
-        /* General Reset */
-        * {
-            box-sizing: border-box !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        /* Full Height Layout */
-        html, body {
-            height: 100% !important;
-            display: flex !important;
-            flex-direction: column !important;
-            font-family: Arial, sans-serif !important;
-            background-color: white !important;
-            color: black !important;
-        }
-
         /* Navbar Styling */
         .navbar {
             position: fixed !important;
