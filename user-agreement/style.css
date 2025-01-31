@@ -1,3 +1,10 @@
+/* General Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 /* General body and layout */
 html, body {
     height: 100%;
