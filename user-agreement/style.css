@@ -12,27 +12,30 @@ html, body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
-    padding-bottom: 50px; /* Ensures bottom spacing */
+    display: flex;
+    flex-direction: column;
 }
 
-/* Flexbox layout for the entire body */
-body *:not(footer) {
+/* Ensure main content takes full height */
+.main-container {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Centers content vertically */
+    width: 100%;
+    padding: 50px 0; /* Equal top and bottom padding */
 }
 
 /* Main content wrapper */
 .content-wrapper {
-    flex: 1;
     width: 90%;
     max-width: 800px;
-    padding: 50px 30px; /* Ensures equal top and bottom padding */
+    padding: 30px;
     text-align: left;
     background: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    margin-top: 50px; /* Matches bottom padding */
 }
 
 /* Heading styling */
@@ -57,8 +60,7 @@ p, ul {
     font-size: 18px;
     line-height: 1.8;
     text-align: left;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 0 10px;
 }
 
 /* Links styling */
@@ -73,7 +75,7 @@ a:hover {
     color: #0056b3;
 }
 
-/* Search-specific styling */
+/* Search bar */
 #searchBar {
     width: 100%;
     padding: 10px;
@@ -113,11 +115,11 @@ a:hover {
 /* Legal Pages (Terms and Privacy) */
 .terms-content, .privacy-content {
     text-align: left;
-    margin: 50px auto; /* Matches bottom padding */
+    margin: 20px auto;
     width: 90%;
     max-width: 800px;
     background: #fff;
-    padding: 50px; /* Ensures equal top and bottom padding */
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
