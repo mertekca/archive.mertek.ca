@@ -12,25 +12,22 @@ html, body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
-}
-
-/* Flexbox layout for the entire body */
-body *:not(footer) {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Keeps content centered while allowing text alignment adjustments */
+    align-items: center;
 }
 
 /* Main content wrapper */
 .content-wrapper {
     flex: 1;
-    width: 90%; /* Ensures it doesn't span the full width */
+    width: 90%;
     max-width: 800px;
     padding: 30px;
-    text-align: left; /* Aligns text to the left */
+    text-align: left;
     background: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    margin-top: 20px;
 }
 
 /* Heading styling */
@@ -38,7 +35,7 @@ h1 {
     font-size: 36px;
     margin-bottom: 20px;
     color: #333;
-    text-align: center; /* Keeps main titles centered */
+    text-align: center;
 }
 
 h2 {
@@ -55,8 +52,8 @@ p, ul {
     font-size: 18px;
     line-height: 1.8;
     text-align: left;
-    margin-left: 10px; /* Adds subtle spacing from the left */
-    margin-right: 10px; /* Keeps text balanced */
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 /* Links styling */
@@ -93,7 +90,6 @@ a:hover {
     border: 1px solid #ddd;
     margin-bottom: 10px;
     border-radius: 5px;
-    text-align: left;
     background-color: #fff;
     transition: background 0.3s ease;
 }
