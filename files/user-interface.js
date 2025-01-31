@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             font-size: 16px !important;
             border-top: 1px solid #444 !important;
             width: 100% !important;
-            padding: 10px 0 !important;
+            padding: 5px 0 !important;
             margin-top: auto !important;
         }
     `;
