@@ -50,10 +50,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const resultCount = document.getElementById("resultCount"); // Element to display result count
         fileList.innerHTML = "";
 
-        if (filteredFiles.length > 0) {
+        if (query === "") {
+            resultCount.style.display = "none"; // Hide result count if no search query
+        } else if (filteredFiles.length > 0) {
             noResults.style.display = "none"; // Hide "no results" message
             resultCount.style.display = "block"; // Show the result count
-            resultCount.textContent = `${filteredFiles.length} result(s) found`; // Display the number of results
+
+            // Show proper result text ("Result" or "Results")
+            const resultText = filteredFiles.length === 1 ? "Result" : "Results";
+            resultCount.textContent = `${filteredFiles.length} ${resultText} found`; // Display the number of results
             filteredFiles.forEach((file) => {
                 const a = document.createElement("a");
                 a.href = file.url;
