@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     const dropdownMenu = document.getElementById("fileSelector");
     const searchBar = document.getElementById("searchBar");
+    const fileList = document.getElementById("fileList");
+    const noResults = document.getElementById("noResults");
+    const resultCount = document.getElementById("resultCount");
     const fileInputTemplate = document.createElement("input");
     let uploadedFiles = {}; // Store uploaded files by dropdown key
     fileInputTemplate.type = "file";
@@ -12,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // Load files
+    // Load files from the selected file URL
     async function loadFiles(fileUrl = "json-files/main.json") {
         try {
             const response = await fetch(fileUrl);
@@ -23,19 +26,19 @@ document.addEventListener("DOMContentLoaded", () => {
             const files = await response.json();
             displayFiles(files);
 
+            // Set up search functionality
             searchBar.addEventListener("input", () => {
                 searchFiles(files);
             });
 
-            searchFiles(files);
+            searchFiles(files); // Trigger search to show all files by default
         } catch (error) {
             console.error("Error loading files:", error);
-            document.getElementById("fileList").innerHTML =
-                '<p>Failed to load files.</p>';
+            fileList.innerHTML = '<p>Failed to load files.</p>';
         }
     }
 
-    // Search files
+    // Function to handle file search
     function searchFiles(files) {
         const query = searchBar.value.toLowerCase();
         const filteredFiles = files.filter(
@@ -45,44 +48,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 file.inviTags.some((tag) => tag.toLowerCase().includes(query))
         );
 
-        const fileList = document.getElementById("fileList");
-        const noResults = document.getElementById("noResults");
-        const resultCount = document.getElementById("resultCount"); // Element to display result count
-        fileList.innerHTML = "";
+        fileList.innerHTML = ""; // Clear current file list
+        resultCount.style.display = "none"; // Hide result count by default
 
-        if (query === "") {
-            resultCount.style.display = "none"; // Hide result count if no search query
+        if (filteredFiles.length > 0) {
             noResults.style.display = "none"; // Hide "no results" message
-        } else if (filteredFiles.length > 0) {
-            noResults.style.display = "none"; // Hide "no results" message
-            resultCount.style.display = "block"; // Show the result count
-
-            // Show proper result text ("Result" or "Results")
-            const resultText = filteredFiles.length === 1 ? "Result" : "Results";
-            resultCount.textContent = `${filteredFiles.length} ${resultText} found`; // Display the number of results
-            filteredFiles.forEach((file) => {
-                const a = document.createElement("a");
-                a.href = file.url;
-                a.classList.add("file-item");
-                a.innerHTML = `
-                    <div>${file.name}</div>
-                    <small>(${file.tags.join(", ")})</small>
-                `;
-                fileList.appendChild(a);
-            });
+            displayFiles(filteredFiles); // Display filtered files
+            resultCount.style.display = "block"; // Show result count
+            resultCount.textContent = `${filteredFiles.length} result${filteredFiles.length > 1 ? 's' : ''} found`;
         } else {
-            noResults.style.display = "block"; // Show "no results" message
-            resultCount.style.display = "none"; // Hide the result count when there are no results
+            noResults.style.display = "block"; // Show "no results" message if no files match
         }
     }
 
-    // Display files
+    // Function to display files in the file list
     function displayFiles(files) {
-        const fileList = document.getElementById("fileList");
-        const resultCount = document.getElementById("resultCount"); // Element to display result count
-        fileList.innerHTML = "";
-        resultCount.style.display = "none"; // Hide the result count initially
-
         files.forEach((file) => {
             const a = document.createElement("a");
             a.href = file.url;
@@ -93,34 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             fileList.appendChild(a);
         });
-
-        if (files.length === 0) {
-            const noResults = document.getElementById("noResults");
-            noResults.style.display = "block"; // Show "No files found" if there are no files
-        }
     }
 
-    // Dropdown change event
-    dropdownMenu.addEventListener("change", (event) => {
-        const selectedOption = event.target.value;
-
-        if (selectedOption.startsWith("upload")) {
-            const uploadedData = uploadedFiles[selectedOption];
-            if (uploadedData) {
-                // Reload the uploaded file if available
-                displayFiles(uploadedData);
-            } else {
-                // Trigger new file input for this upload option
-                const fileInput = fileInputTemplate.cloneNode();
-                fileInput.addEventListener("change", (e) => handleFileUpload(e, selectedOption));
-                fileInput.click();
-            }
-        } else {
-            loadFiles(selectedOption); // Load selected file
-        }
-    });
-
-    // Handle file upload
+    // Handle file upload functionality
     function handleFileUpload(event, key) {
         const file = event.target.files[0];
         if (file) {
@@ -145,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Add new upload option
+    // Add new upload option to the dropdown
     function addUploadOption() {
         const newKey = `upload-${Object.keys(uploadedFiles).length + 1}`;
         const option = document.createElement("option");
@@ -154,6 +109,26 @@ document.addEventListener("DOMContentLoaded", () => {
         dropdownMenu.appendChild(option);
     }
 
-    // Initial load
+    // Dropdown change event to handle file selection or upload
+    dropdownMenu.addEventListener("change", (event) => {
+        const selectedOption = event.target.value;
+
+        if (selectedOption.startsWith("upload")) {
+            const uploadedData = uploadedFiles[selectedOption];
+            if (uploadedData) {
+                // Reload the uploaded file if available
+                displayFiles(uploadedData);
+            } else {
+                // Trigger new file input for this upload option
+                const fileInput = fileInputTemplate.cloneNode();
+                fileInput.addEventListener("change", (e) => handleFileUpload(e, selectedOption));
+                fileInput.click();
+            }
+        } else {
+            loadFiles(selectedOption); // Load selected file
+        }
+    });
+
+    // Initial load of files
     loadFiles();
 });
