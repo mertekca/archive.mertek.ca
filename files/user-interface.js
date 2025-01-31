@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             color: white !important;
             z-index: 1000 !important;
             display: flex !important;
-            justify-content: space-around !important;
+            justify-content: center !important;
             align-items: center !important;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
         }
@@ -22,10 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
         .nav-list {
             list-style: none !important;
             display: flex !important;
+            flex-direction: row !important; /* Ensure items align left to right */
+            gap: 20px !important; /* Add spacing between items */
+            padding: 0 !important;
+            margin: 0 !important;
         }
 
         .nav-list li {
-            margin: 0 15px !important;
+            display: inline-block !important; /* Ensures inline behavior */
         }
 
         .nav-link {
