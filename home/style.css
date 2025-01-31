@@ -84,7 +84,7 @@ input[type="text"] {
 
 .file-item div,
 .file-item small {
-    font-size: 16px;
+    font-size: 18px; /* Increased font size */
     margin-bottom: 5px;
     width: 100%; /* Make sure text can wrap */
     word-wrap: break-word; /* Ensure text wraps within the box */
@@ -95,5 +95,5 @@ input[type="text"] {
 
 .file-item small {
     color: #666;
-    font-size: 14px;
+    font-size: 16px; /* Increased font size */
 }
