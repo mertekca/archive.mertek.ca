@@ -1,146 +1,117 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const dropdownMenu = document.getElementById("fileSelector");
     const searchBar = document.getElementById("searchBar");
     const fileList = document.getElementById("fileList");
     const noResults = document.getElementById("noResults");
+    const githubRepo = "your-github-username/your-repo-name";
+    const directoryPath = "json-files";
+    let uploadedFiles = {};
     
-    // Replace with your GitHub repository details
-    const username = 'mertekca';
-    const repository = 'archive.mertek.ca';
-    const directory = 'home/json-files';  // Directory in the repository you want to list files from
-    
-    // GitHub API URL to fetch files from the directory
-    const apiUrl = `https://api.github.com/repos/${username}/${repository}/contents/${directory}`;
-
-    // Fetch files from GitHub repository
     async function fetchGitHubFiles() {
         try {
-            const response = await fetch(apiUrl);
+            const response = await fetch(`https://api.github.com/repos/${githubRepo}/contents/${directoryPath}`);
+            if (!response.ok) throw new Error("Failed to fetch file list");
+            
             const files = await response.json();
-
-            // Add "Upload File" option to dropdown
-            const uploadOption = document.createElement("option");
-            uploadOption.value = "upload";
-            uploadOption.textContent = "Upload File";
-            dropdownMenu.appendChild(uploadOption);
-
-            // Add files to the dropdown
-            files.forEach((file) => {
-                if (file.type === 'file') { // Ensure it's a file, not a directory
-                    const option = document.createElement("option");
-                    option.value = file.download_url;  // URL to download the file
-                    option.textContent = file.name;  // Display the file name
-                    dropdownMenu.appendChild(option);
+            for (const file of files) {
+                if (file.name.endsWith(".json")) {
+                    await loadFile(file.download_url, file.name);
                 }
-            });
-
-            // Show "Upload File" option
-            const uploadFileOption = document.createElement("option");
-            uploadFileOption.value = "upload";
-            uploadFileOption.textContent = "Upload File";
-            dropdownMenu.appendChild(uploadFileOption);
-
-            // Initialize file search
-            searchBar.addEventListener("input", () => {
-                searchFiles(files);
-            });
-
-            // Display files
-            displayFiles(files);
+            }
+            
+            addUploadOption();
         } catch (error) {
-            console.error("Error fetching files from GitHub:", error);
-            fileList.innerHTML = '<p>Failed to load files from GitHub.</p>';
+            console.error("Error fetching GitHub files:", error);
         }
     }
-
-    // Function to display the files based on search input
-    function searchFiles(files) {
-        const query = searchBar.value.toLowerCase();
-        const filteredFiles = files.filter(
-            (file) => file.name.toLowerCase().includes(query)
-        );
-
-        fileList.innerHTML = "";
-
-        if (filteredFiles.length > 0) {
-            noResults.style.display = "none";
-            filteredFiles.forEach((file) => {
-                const a = document.createElement("a");
-                a.href = file.download_url;
-                a.classList.add("file-item");
-                a.innerHTML = `
-                    <div>${file.name}</div>
-                    <small>(${file.size} bytes)</small>
-                `;
-                fileList.appendChild(a);
-            });
+    
+    async function loadFile(fileUrl, filename) {
+        try {
+            const response = await fetch(fileUrl);
+            if (!response.ok) throw new Error(`Failed to load ${filename}`);
+            
+            const fileData = await response.json();
+            
+            if (fileData.filename) {
+                addDropdownOption(fileUrl, fileData.filename);
+            } else {
+                addDropdownOption(fileUrl, filename);
+            }
+        } catch (error) {
+            console.error("Error loading file:", error);
+        }
+    }
+    
+    function addDropdownOption(fileUrl, displayName) {
+        const option = document.createElement("option");
+        option.value = fileUrl;
+        option.textContent = displayName;
+        dropdownMenu.appendChild(option);
+    }
+    
+    function addUploadOption() {
+        const option = document.createElement("option");
+        option.value = "upload";
+        option.textContent = "Upload File";
+        dropdownMenu.appendChild(option);
+    }
+    
+    dropdownMenu.addEventListener("change", async (event) => {
+        const selectedOption = event.target.value;
+        
+        if (selectedOption === "upload") {
+            handleFileUpload();
         } else {
-            noResults.style.display = "block";  // Show "no results" message
+            try {
+                const response = await fetch(selectedOption);
+                if (!response.ok) throw new Error("Failed to load file");
+                const files = await response.json();
+                displayFiles(files);
+            } catch (error) {
+                console.error("Error loading selected file:", error);
+            }
         }
-
-        // Show result count
-        const resultCount = document.getElementById("resultCount");
-        resultCount.style.display = filteredFiles.length > 0 ? "block" : "none";
-        if (filteredFiles.length === 1) {
-            resultCount.textContent = `1 result`;
-        } else if (filteredFiles.length > 1) {
-            resultCount.textContent = `${filteredFiles.length} results`;
-        }
+    });
+    
+    function handleFileUpload() {
+        const fileInput = document.createElement("input");
+        fileInput.type = "file";
+        fileInput.accept = ".json";
+        fileInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    try {
+                        const data = JSON.parse(reader.result);
+                        uploadedFiles[file.name] = data;
+                        displayFiles(data);
+                        addDropdownOption("upload-" + file.name, file.name);
+                    } catch (error) {
+                        alert("Invalid JSON format");
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+        fileInput.click();
     }
-
-    // Function to display all files initially
+    
     function displayFiles(files) {
         fileList.innerHTML = "";
-
+        if (files.length === 0) {
+            noResults.style.display = "block";
+            return;
+        }
+        noResults.style.display = "none";
         files.forEach((file) => {
             const a = document.createElement("a");
-            a.href = file.download_url;
+            a.href = file.url;
             a.classList.add("file-item");
-            a.innerHTML = `
-                <div>${file.name}</div>
-                <small>(${file.size} bytes)</small>
-            `;
+            a.innerHTML = `<div>${file.name}</div><small>(${file.tags.join(", ")})</small>`;
             fileList.appendChild(a);
         });
     }
-
-    // Dropdown change event to handle file selection
-    dropdownMenu.addEventListener("change", (event) => {
-        const selectedOption = event.target.value;
-
-        if (selectedOption === "upload") {
-            // Handle file upload (this part is unchanged from previous)
-            const fileInput = document.createElement("input");
-            fileInput.type = "file";
-            fileInput.accept = ".json"; // Accept JSON files
-            fileInput.addEventListener("change", (e) => handleFileUpload(e));
-            fileInput.click();
-        } else {
-            // Load selected file by URL
-            displaySelectedFile(selectedOption);
-        }
-    });
-
-    // Display selected file's contents
-    function displaySelectedFile(fileUrl) {
-        const fileList = document.getElementById("fileList");
-        fileList.innerHTML = `<p>Loading file...</p>`;
-
-        fetch(fileUrl)
-            .then((response) => response.json())
-            .then((fileContent) => {
-                const fileContentDiv = document.createElement("div");
-                fileContentDiv.classList.add("file-content");
-                fileContentDiv.innerHTML = JSON.stringify(fileContent, null, 2);
-                fileList.innerHTML = ""; // Clear existing content
-                fileList.appendChild(fileContentDiv);
-            })
-            .catch((error) => {
-                console.error("Error fetching file content:", error);
-                fileList.innerHTML = `<p>Error loading file content.</p>`;
-            });
-    }
-
-    // Initialize the page
-    fetchGitHubFiles();
+    
+    await fetchGitHubFiles();
 });
