@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         h1 {
             margin-top: 20px;
-            font-size: 24px;
+            font-size: 50px;
             color: #333;
         }
         iframe {
