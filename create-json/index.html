@@ -39,74 +39,13 @@
 
     <button id="copy-btn">Copy JSON</button>
 
-    <script>
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBc2p_OYkuo1IYw4xc-0NYn0M5VtMf-iVI",
-            authDomain: "mertek-archive-site-login.firebaseapp.com",
-            projectId: "mertek-archive-site-login",
-            storageBucket: "mertek-archive-site-login.firebasestorage.app",
-            messagingSenderId: "194382051161",
-            appId: "1:194382051161:web:21e9ea763a0d59bd33be48",
-            measurementId: "G-FTYTP99H96"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const firestore = firebase.firestore();
-
-        // List of allowed users' email addresses
-        const allowedEmails = ['contact.mertek@gmail.com', 'tamtube741@gmail.com'];
-
-        // Check authentication state
-        auth.onAuthStateChanged((user) => {
-            if (!user) {
-                // Redirect to login page if user is not signed in
-                window.location.href = '/log-in';
-            } else {
-                // Check if the signed-in user is allowed
-                if (allowedEmails.includes(user.email)) {
-                    // Show content for allowed users
-                    document.getElementById('content').style.display = 'block';
-                    document.getElementById('file-management').style.display = 'block'; // Show file management
-                    console.log('User is signed in and allowed:', user.displayName);
-                    loadSavedFiles(user.uid); // Load saved filesets when authorized
-                } else {
-                    // Redirect to home or an unauthorized access page
-                    window.location.href = '/not-permitted';
-                }
-            }
-        });
-
-        // Load saved file sets from Firestore
-        function loadSavedFiles(userId) {
-            const userRef = firestore.collection('users').doc(userId);
-            userRef.collection('filesets').get().then((querySnapshot) => {
-                const savedSetsList = document.getElementById('saved-file-sets');
-                savedSetsList.innerHTML = ''; // Clear previous saved sets
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const div = document.createElement('div');
-                    div.classList.add('file-set-item');
-                    div.innerHTML = `
-                        <span>${data.name}</span>
-                        <button class="load-btn" onclick="loadFileSet('${doc.id}')">Load</button>
-                        <button class="delete-btn" onclick="deleteFileSet('${doc.id}', '${data.name}')">X</button>
-                    `;
-                    savedSetsList.appendChild(div);
-                });
-            });
-        }
-
-        // Save File Set
-        document.getElementById('save-file-set').addEventListener('click', () => {
-            const fileSetName = document.getElementById('file-set-name').value;
-            if (!fileSetName) {
-                alert('Please enter a name for the file set');
-                return;
-            }
-
+    // Save File Set
+    document.getElementById('save-file-set').addEventListener('click', () => {
+        const fileSetName = document.getElementById('file-set-name').value;
+          if (!fileSetName) {
+             alert('Please enter a name for the file set');
+             return;
+           }
             const user = auth.currentUser;
             const userRef = firestore.collection('users').doc(user.uid);
             userRef.collection('filesets').add({
