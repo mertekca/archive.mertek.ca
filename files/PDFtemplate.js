@@ -1,10 +1,10 @@
 // script.js
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Set title
+    // Set document title
     document.title = STORY_TITLE;
 
-    // Basic styles
+    // Inject styles
     const style = document.createElement("style");
     style.textContent = `
         body {
@@ -53,7 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     document.head.appendChild(style);
 
-    // Elements
+    // Inject user-interface.js
+    const userScript = document.createElement("script");
+    userScript.src = "/files/user-interface.js";
+    userScript.defer = true; // Optional: ensures it runs after HTML is parsed
+    document.head.appendChild(userScript);
+
+    // Build elements
     const header = document.createElement("h1");
     header.textContent = STORY_TITLE;
 
@@ -75,10 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
     downloadBtn.download = "";
     downloadBtn.textContent = "Download PDF";
 
-    // Build structure
     buttonContainer.appendChild(homeBtn);
     buttonContainer.appendChild(downloadBtn);
 
+    // Append to body
     document.body.appendChild(header);
     document.body.appendChild(iframe);
     document.body.appendChild(buttonContainer);
