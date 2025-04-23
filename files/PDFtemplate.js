@@ -53,12 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     document.head.appendChild(style);
 
-    // Inject user-interface.js
-    const userScript = document.createElement("script");
-    userScript.src = "/files/user-interface.js";
-    userScript.defer = true; // Optional: ensures it runs after HTML is parsed
-    document.head.appendChild(userScript);
-
     // Build elements
     const header = document.createElement("h1");
     header.textContent = STORY_TITLE;
