@@ -3,12 +3,18 @@
         "name": "First Day",
         "url": "/files/first-day/", 
         "tags": ["anxiousness", "beginnings"],
-        "inviTags": ["school", "student", "new beginnings", "nervousness", "time management", "new experiences", "first day", "friendship", "anticipation", "decisions", "racing", "self-discovery"]
+        "inviTags": ["school", "student", "new beginnings", "nervousness"]
     },
     { 
         "name": "Volcanic Eruptions", 
         "url": "/files/volcanic-eruptions/",
         "tags": ["disaster", "explosive"],
         "inviTags": ["nature", "eruption", "lava"]
+    },
+        { 
+        "name": "HJ Hunger Games, 
+        "url": "/files/heros-journey-hunger-games/",
+        "tags": ["Story", "Hero's Journey"],
+        "inviTags": ["katniss", "book", "story"]
     }
 ]
