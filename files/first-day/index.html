@@ -1,19 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Loading...</title>
-    <link rel="icon" href="/files/favicon.ico" type="image/x-icon">
+// script.js
 
-    <!-- Config Constants -->
-    <script>
-        const STORY_TITLE = "First Day";
-        const PDF_FILE = "first-day.pdf";
-    </script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Set document title
+    document.title = STORY_TITLE;
 
-    <!-- External JavaScript -->
-    <script src="/files/PDFtemplate.js" defer></script>
-    <script src="/files/user-interface.js"></script>
-</head>
-</html>
+    // Inject styles
+    const style = document.createElement("style");
+    style.textContent = `
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 50px;
+            color: #333;
+        }
+        iframe {
+            width: 80%;
+            height: 80vh;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .button-container {
+            margin: 20px 0;
+            display: flex;
+            gap: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Inject user-interface.js
+    const userScript = document.createElement("script");
+    userScript.src = "/files/user-interface.js";
+    userScript.defer = true; // Optional: ensures it runs after HTML is parsed
+    document.head.appendChild(userScript);
+
+    // Build elements
+    const header = document.createElement("h1");
+    header.textContent = STORY_TITLE;
+
+    const iframe = document.createElement("iframe");
+    iframe.src = PDF_FILE + "#toolbar=0";
+    iframe.title = "PDF Viewer";
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.className = "button-container";
+
+    const homeBtn = document.createElement("a");
+    homeBtn.href = "/";
+    homeBtn.className = "button";
+    homeBtn.textContent = "Home";
+
+    const downloadBtn = document.createElement("a");
+    downloadBtn.href = PDF_FILE;
+    downloadBtn.className = "button";
+    downloadBtn.download = "";
+    downloadBtn.textContent = "Download PDF";
+
+    buttonContainer.appendChild(homeBtn);
+    buttonContainer.appendChild(downloadBtn);
+
+    // Append to body
+    document.body.appendChild(header);
+    document.body.appendChild(iframe);
+    document.body.appendChild(buttonContainer);
+});
